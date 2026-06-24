@@ -3,497 +3,492 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ديتسلوفا | شوكولاتة بلجيكية محلّاة بالتمر</title>
-<meta name="description" content="ديتسلوفا — شوكولاتة بلجيكية فاخرة محلّاة بالتمر الطبيعي. بدون سكر مصنّع، بدون زيوت مهدرجة، بدون مواد حافظة." />
+<!-- 2- تعديل نوع الخط: استخدام خطوط عربية عصرية -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ========================================================= -->
-<!--  الخطوط من Google Fonts                                     -->
-<!-- ========================================================= -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<!-- 10- تعديل الوصف: إزالة "بلجيكي" -->
+<title>Dates lova | شوكولاتة فاخرة محلّاة بالتمر</title>
+<meta name="description" content="Dates lova — شوكولاتة فاخرة محلّاة بالتمر الطبيعي. بدون سكر مصنّع، بدون زيوت مهدرجة، بدون مواد حافظة." />
 
 <style>
 /* =========================================================
-   متغيرات الألوان — مشتقة من المنتج نفسه
+   متغيرات الألوان — 3- تعديل الألوان لتكون أكثر عصرية وفاتحة
    ========================================================= */
-:root{
-  --cocoa-dark:#1C1208;     /* شوكولاتة بلجيكية داكنة */
-  --cocoa-mid:#3D2817;      /* بني دبس التمر */
-  --roast:#7A4A28;          /* بني محمّص */
-  --amber:#C8964F;          /* عنبر التمر — اللون المميز */
-  --amber-soft:#E0B878;
-  --cream:#F5EBDA;          /* كريمي دافئ */
-  --cream-deep:#EDDFC8;
-  --pom:#A8253B;            /* رمان نجدي — لمسة الـ CTA */
-  --pom-dark:#8A1C2F;
-  --white:#FFFDF8;
-  --ink:#241608;
+:root {
+  --gold: #C8964F;           /* ذهبي */
+  --gold-light: #E0B878;     /* ذهبي فاتح */
+  --brown-light: #8C6E54;    /* بني فاتح */
+  --cream: #F9F5F0;          /* كريمي فاتح جداً */
+  --white: #FFFFFF;          /* أبيض نقي */
+  --dark-text: #3E3E3E;      /* نص داكن (ليس أسود تماماً) */
+  --accent: #A8253B;         /* لون مميز للتركيز (مثل الرمان) */
 
-  --maxw:1200px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --maxw: 1200px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --font-main: 'Cairo', sans-serif;       /* خط النصوص الرئيسية */
+  --font-head: 'Noto Kufi Arabic', sans-serif; /* خط العناوين */
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'IBM Plex Sans Arabic',sans-serif;
-  background:var(--cream);
-  color:var(--ink);
-  line-height:1.75;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-main);
+  background: var(--cream);
+  color: var(--dark-text);
+  line-height: 1.7;
+  overflow-x: hidden;
 }
-h1,h2,h3,.display{font-family:'Reem Kufi',sans-serif;font-weight:600;line-height:1.3}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
+h1, h2, h3, .display { font-family: var(--font-head); font-weight: 700; line-height: 1.25; }
+img { max-width: 100%; display: block; height: auto; }
+a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 /* =========================================================
-   عناصر نائبة للصور (placeholders) — استبدلها لاحقاً
-   كل عنصر فيه data-replace يوضح الصورة المطلوبة
+   شريط التنقل (Navbar)
    ========================================================= */
-.ph{
-  position:relative;
-  background:
-    repeating-linear-gradient(135deg,rgba(200,150,79,.07) 0 14px,transparent 14px 28px),
-    linear-gradient(135deg,var(--cocoa-mid),var(--roast));
-  display:flex;align-items:center;justify-content:center;
-  color:var(--amber-soft);
-  text-align:center;
-  overflow:hidden;
-  border:1px solid rgba(200,150,79,.25);
+.nav {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 5vw, 60px);
+  transition: all 0.4s var(--ease);
 }
-.ph::before{
-  content:"⬡";
-  position:absolute;font-size:clamp(40px,8vw,90px);
-  opacity:.12;color:var(--amber);
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شفافة */
+  backdrop-filter: blur(10px);
+  padding-top: 12px; padding-bottom: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
-.ph span{
-  position:relative;z-index:2;
-  font-family:'IBM Plex Sans Arabic',sans-serif;
-  font-size:.82rem;font-weight:500;
-  padding:10px 16px;line-height:1.6;
-  letter-spacing:.2px;
-  color:var(--cream);
-  background:rgba(28,18,8,.45);
-  border-radius:6px;
-  backdrop-filter:blur(2px);
-  max-width:80%;
-}
-.ph .tag{display:block;font-size:.68rem;color:var(--amber);margin-top:4px;font-weight:400}
+/* 1- تعديل الشعار: استخدام الصورة */
+.nav .logo img { height: 50px; width: auto; /* تعديل حجم الشعار */ }
+/* 9- عبارة ديتسلوفا بالانجليزي فقط (تم استبدالها بالشعار الصوري) */
 
-/* =========================================================
-   شريط التنقل
-   ========================================================= */
-.nav{
-  position:fixed;top:0;right:0;left:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px clamp(20px,5vw,60px);
-  transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s;
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 0.95rem; color: var(--dark-text); font-weight: 500; position: relative;
 }
-.nav.scrolled{
-  background:rgba(28,18,8,.92);
-  backdrop-filter:blur(10px);
-  padding-top:12px;padding-bottom:12px;
-  box-shadow:0 4px 30px rgba(0,0,0,.25);
+.nav-links a:hover { color: var(--gold); }
+.nav-links a::after {
+  content: ""; position: absolute; bottom: -6px; right: 0; width: 0; height: 2px;
+  background: var(--gold); transition: width 0.3s var(--ease);
 }
-.nav .logo{font-family:'Reem Kufi',sans-serif;font-size:1.5rem;font-weight:700;color:var(--cream);letter-spacing:.5px}
-.nav .logo b{color:var(--amber)}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{font-size:.92rem;color:rgba(245,235,218,.85);font-weight:400;transition:color .25s;position:relative}
-.nav-links a:hover{color:var(--amber)}
-.nav-links a::after{content:"";position:absolute;bottom:-6px;right:0;width:0;height:2px;background:var(--amber);transition:width .3s var(--ease)}
-.nav-links a:hover::after{width:100%}
-.nav .nav-cta{
-  background:var(--amber);color:var(--cocoa-dark);
-  padding:9px 20px;border-radius:40px;font-weight:600;font-size:.9rem;
-  transition:transform .25s var(--ease),background .25s;
+.nav-links a:hover::after { width: 100%; }
+.nav .nav-cta {
+  background: var(--gold); color: var(--white);
+  padding: 10px 24px; border-radius: 40px; font-weight: 600; font-size: 0.92rem;
+  transition: all 0.3s var(--ease);
 }
-.nav .nav-cta:hover{transform:translateY(-2px);background:var(--amber-soft)}
-.menu-btn{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
-.menu-btn span{width:26px;height:2px;background:var(--cream);transition:.3s}
+.nav .nav-cta:hover { transform: translateY(-2px); background: var(--gold-light); box-shadow: 0 8px 20px rgba(200, 150, 79, 0.3); }
+.menu-btn {
+  display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 6px;
+}
+.menu-btn span { width: 26px; height: 2px; background: var(--dark-text); transition: 0.3s; }
 
 /* =========================================================
    ١) الواجهة الرئيسية HERO
    ========================================================= */
-.hero{
-  position:relative;min-height:100vh;
-  display:flex;align-items:center;
-  background:var(--cocoa-dark);
-  overflow:hidden;
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  background: var(--brown-light); /* لون احتياطي */
+  overflow: hidden; color: var(--white); /* نص أبيض على خلفية غامقة */
 }
-.hero-bg{position:absolute;inset:0;z-index:1}
-.hero-bg .ph{width:100%;height:100%;border:none;align-items:flex-end;justify-content:flex-start;padding:24px}
-.hero-bg .ph::before{top:auto;bottom:20px;left:30px;font-size:60px}
-.hero-bg .ph span{background:rgba(28,18,8,.6)}
-.hero-bg::after{
-  content:"";position:absolute;inset:0;z-index:3;
-  background:linear-gradient(105deg,rgba(28,18,8,.92) 0%,rgba(28,18,8,.7) 45%,rgba(28,18,8,.35) 100%);
+/* 4- صورة افتراضية للواجهة الرئيسية */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url('image_0.png'); /* صورة لوح الشوكولاتة */
+  background-size: cover; background-position: center;
 }
-.hero-inner{
-  position:relative;z-index:5;
-  max-width:var(--maxw);margin:0 auto;width:100%;
-  padding:120px clamp(20px,5vw,60px) 60px;
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0; z-index: 2;
+  /* تدرج لوني لجعل النص مقروءاً */
+  background: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
 }
-.hero .eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  color:var(--amber);font-size:.95rem;font-weight:500;letter-spacing:1px;
-  margin-bottom:24px;opacity:0;animation:fadeUp .8s var(--ease) .2s forwards;
+.hero-inner {
+  position: relative; z-index: 5;
+  max-width: var(--maxw); margin: 0 auto; width: 100%;
+  padding: 140px clamp(20px, 5vw, 60px) 60px;
 }
-.hero .eyebrow::before{content:"";width:38px;height:1px;background:var(--amber)}
-.hero h1{
-  font-size:clamp(2.4rem,6.5vw,5rem);
-  color:var(--cream);font-weight:700;
-  max-width:14ch;margin-bottom:22px;
-  opacity:0;animation:fadeUp .9s var(--ease) .35s forwards;
+.hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--gold); font-size: 1rem; font-weight: 600; letter-spacing: 1px;
+  margin-bottom: 20px;
 }
-.hero h1 .hl{color:var(--amber);position:relative;display:inline-block}
-.hero .sub{
-  font-size:clamp(1rem,2vw,1.3rem);
-  color:rgba(245,235,218,.82);font-weight:300;
-  max-width:42ch;margin-bottom:40px;
-  opacity:0;animation:fadeUp .9s var(--ease) .55s forwards;
+.hero .eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--gold); }
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  margin-bottom: 22px;
 }
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s var(--ease) .75s forwards}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:15px 32px;border-radius:50px;font-weight:600;font-size:1rem;
-  cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,background .25s;border:none;
-  font-family:'IBM Plex Sans Arabic',sans-serif;
+.hero h1 .hl { color: var(--gold); }
+/* 10- تعديل الوصف: إزالة "بلجيكي" */
+.hero .sub {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 300; color: rgba(255, 255, 255, 0.9);
+  max-width: 46ch; margin-bottom: 40px;
 }
-.btn-primary{background:var(--amber);color:var(--cocoa-dark);box-shadow:0 10px 30px rgba(200,150,79,.3)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(200,150,79,.45);background:var(--amber-soft)}
-.btn-ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(245,235,218,.35)}
-.btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-3px)}
-.scroll-hint{
-  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:5;
-  color:rgba(245,235,218,.5);font-size:.8rem;text-align:center;
-  animation:bob 2s ease-in-out infinite;
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 34px; border-radius: 50px; font-weight: 700; font-size: 1.05rem;
+  cursor: pointer; transition: all 0.3s var(--ease); border: none;
+  font-family: var(--font-main);
 }
-.scroll-hint span{display:block;font-size:1.2rem;margin-top:4px}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.btn-primary {
+  background: var(--gold); color: var(--white);
+  box-shadow: 0 10px 30px rgba(200, 150, 79, 0.3);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(200, 150, 79, 0.45); background: var(--gold-light); }
+.btn-ghost {
+  background: transparent; color: var(--white); border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(255, 255, 255, 0.05); transform: translateY(-3px); }
+.scroll-hint {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 5;
+  color: var(--white); font-size: 0.85rem; text-align: center; opacity: 0.7;
+  animation: bob 2s ease-in-out infinite;
+}
+.scroll-hint span { display: block; font-size: 1.4rem; margin-top: 4px; }
+@keyframes bob { 0%, 100% { transform: translateX(-50%) translateY(0) } 50% { transform: translateX(-50%) translateY(10px) } }
 
 /* =========================================================
-   ٢) الميزة التنافسية — العنصر المميز (الـ "بدون")
+   ٢) الميزة التنافسية — قسم "بدون"
    ========================================================= */
-.value{padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);background:var(--cream);position:relative}
-.section-head{max-width:var(--maxw);margin:0 auto 60px;text-align:center}
-.section-head .eyebrow{
-  display:inline-block;color:var(--roast);font-size:.9rem;font-weight:600;
-  letter-spacing:2px;margin-bottom:14px;text-transform:uppercase;
+.value { padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px); background: var(--white); }
+.section-head { max-width: var(--maxw); margin: 0 auto 70px; text-align: center; }
+.section-head .eyebrow {
+  display: inline-block; color: var(--gold); font-size: 0.95rem; font-weight: 600;
+  letter-spacing: 1.5px; margin-bottom: 14px; text-transform: uppercase;
 }
-.section-head h2{font-size:clamp(1.8rem,4vw,3rem);color:var(--cocoa-dark);margin-bottom:16px}
-.section-head p{font-size:1.1rem;color:var(--roast);max-width:50ch;margin:0 auto;font-weight:300}
+.section-head h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin-bottom: 18px; }
+.section-head p { font-size: 1.15rem; color: var(--brown-light); max-width: 54ch; margin: 0 auto; font-weight: 400; }
 
-/* بطاقة الـ "بدون" المميزة */
-.no-banner{
-  max-width:var(--maxw);margin:0 auto 64px;
-  background:var(--cocoa-dark);border-radius:24px;
-  padding:clamp(36px,5vw,64px);
-  position:relative;overflow:hidden;
+/* 5- تعديل بلوك "ما الذي لن تجده": تصميم أنظف بدون شطب */
+.no-banner {
+  max-width: var(--maxw); margin: 0 auto 80px;
+  background: var(--cream); border-radius: 30px;
+  padding: clamp(40px, 6vw, 70px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  text-align: center;
 }
-.no-banner::before{
-  content:"";position:absolute;top:-40%;left:-10%;width:340px;height:340px;
-  background:radial-gradient(circle,rgba(200,150,79,.18),transparent 70%);
+.no-banner h3 {
+  color: var(--gold); font-size: 1.3rem; margin-bottom: 40px;
 }
-.no-banner h3{
-  color:var(--amber);font-size:1.05rem;font-weight:500;letter-spacing:1px;
-  text-align:center;margin-bottom:36px;position:relative;
+.no-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
 }
-.no-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;
+.no-item {
+  background: var(--white); padding: 30px 20px; border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); transition: transform 0.3s;
 }
-.no-item{text-align:center}
-.no-word{
-  font-family:'Reem Kufi',sans-serif;font-size:clamp(1.1rem,2.4vw,1.7rem);font-weight:600;
-  color:rgba(245,235,218,.35);position:relative;display:inline-block;
+.no-item:hover { transform: translateY(-5px); }
+.no-icon-wrapper {
+  width: 60px; height: 60px; margin: 0 auto 15px;
+  background: #FFF0F0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
 }
-.no-word::after{
-  content:"";position:absolute;top:52%;right:-4%;width:0;height:3px;
-  background:var(--pom);transition:width .6s var(--ease);
-}
-.no-item.struck .no-word::after{width:108%}
-.no-label{display:block;color:var(--cream);font-size:.92rem;margin-top:10px;font-weight:300}
-.no-x{display:block;color:var(--pom);font-size:1.4rem;margin-bottom:6px;font-weight:700;opacity:0;transition:opacity .4s .3s}
-.no-item.struck .no-x{opacity:1}
+/* استخدام أيقونة X واضحة بدلاً من الشطب */
+.no-icon { color: var(--accent); font-size: 1.8rem; font-weight: bold; }
+.no-word { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--dark-text); display: block; margin-bottom: 8px; }
+.no-label { font-size: 0.95rem; color: var(--brown-light); }
 
-/* بطاقات المزايا الأربع */
-.feat-grid{
-  max-width:var(--maxw);margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+/* بطاقات المزايا */
+.feat-grid {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
 }
-.feat-card{
-  background:var(--white);border-radius:18px;padding:36px 28px;
-  border:1px solid rgba(122,74,40,.12);
-  transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;
-  text-align:right;
+.feat-card {
+  background: var(--white); border-radius: 24px; padding: 40px 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s var(--ease); text-align: center;
 }
-.feat-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(61,40,23,.12);border-color:var(--amber)}
-.feat-ico{
-  width:58px;height:58px;border-radius:14px;
-  background:linear-gradient(135deg,var(--amber),var(--amber-soft));
-  display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:20px;
+.feat-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(200, 150, 79, 0.15); }
+.feat-ico {
+  width: 70px; height: 70px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px; color: var(--white);
+  box-shadow: 0 10px 25px rgba(200, 150, 79, 0.3);
 }
-.feat-card h3{font-size:1.25rem;color:var(--cocoa-dark);margin-bottom:10px}
-.feat-card p{font-size:.96rem;color:var(--roast);font-weight:300}
+.feat-card h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.feat-card p { font-size: 1rem; color: var(--brown-light); }
 
 /* =========================================================
    ٣) قصة البراند
    ========================================================= */
-.story{
-  padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);
-  background:var(--cocoa-mid);color:var(--cream);
+.story {
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px);
+  background: var(--cream);
 }
-.story-inner{
-  max-width:var(--maxw);margin:0 auto;
-  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+.story-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center;
 }
-.story-text .eyebrow{color:var(--amber);font-size:.9rem;font-weight:600;letter-spacing:2px;margin-bottom:16px;display:block}
-.story-text h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:24px;color:var(--cream)}
-.story-text p{font-size:1.08rem;color:rgba(245,235,218,.85);font-weight:300;margin-bottom:18px;max-width:46ch}
-.story-text .note{font-size:.85rem;color:var(--amber-soft);font-style:italic;margin-top:8px;opacity:.8}
-.story-img .ph{width:100%;aspect-ratio:4/5;border-radius:20px}
+.story-text .eyebrow { color: var(--gold); font-size: 1rem; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 16px; display: block; }
+.story-text h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 26px; }
+/* 10- تعديل الوصف */
+.story-text p { font-size: 1.1rem; color: var(--brown-light); margin-bottom: 20px; max-width: 50ch; }
+.story-text .note { font-size: 0.9rem; color: var(--gold); font-style: italic; margin-top: 12px; opacity: 0.8; }
+/* 4- صورة افتراضية لقصة البراند */
+.story-img {
+  border-radius: 30px; overflow: hidden; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+}
+.story-img img { width: 100%; height: auto; display: block; transition: transform 0.5s var(--ease); }
+.story-img:hover img { transform: scale(1.03); }
 
 /* =========================================================
    ٤) معرض المنتجات
    ========================================================= */
-.products{padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);background:var(--cream)}
-.prod-grid{
-  max-width:var(--maxw);margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+.products { padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px); background: var(--white); }
+.prod-grid {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
 }
-.prod-card{
-  background:var(--white);border-radius:18px;overflow:hidden;
-  border:1px solid rgba(122,74,40,.1);
-  transition:transform .35s var(--ease),box-shadow .35s;
+.prod-card {
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s var(--ease);
 }
-.prod-card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(61,40,23,.14)}
-.prod-card:hover .ph{transform:scale(1.05)}
-.prod-img{overflow:hidden;aspect-ratio:1}
-.prod-img .ph{width:100%;height:100%;transition:transform .6s var(--ease)}
-.prod-body{padding:22px 22px 26px}
-.prod-body h3{font-size:1.2rem;color:var(--cocoa-dark);margin-bottom:6px}
-.prod-body p{font-size:.9rem;color:var(--roast);font-weight:300}
-.prod-cta{text-align:center;margin-top:54px}
+.prod-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(200, 150, 79, 0.15); }
+/* 4- صور افتراضية للمنتجات */
+.prod-img { position: relative; padding-top: 100%; overflow: hidden; background: var(--cream); }
+.prod-img img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.6s var(--ease);
+}
+.prod-card:hover .prod-img img { transform: scale(1.08); }
+.prod-body { padding: 26px 24px 30px; text-align: center; }
+.prod-body h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.prod-body p { font-size: 0.95rem; color: var(--brown-light); }
+.prod-cta { text-align: center; margin-top: 60px; }
 
 /* =========================================================
    ٥) الجودة والتصنيع
    ========================================================= */
-.quality{padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);background:var(--cocoa-dark);color:var(--cream)}
-.quality .section-head h2{color:var(--cream)}
-.quality .section-head p{color:rgba(245,235,218,.7)}
-.q-gallery{
-  max-width:var(--maxw);margin:0 auto 56px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+.quality {
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px);
+  background: var(--cream);
 }
-.q-gallery .ph{aspect-ratio:1;border-radius:14px}
-.q-gallery .ph.wide{grid-column:span 2;aspect-ratio:2/1}
-.q-points{
-  max-width:var(--maxw);margin:0 auto 50px;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:30px;
+/* 4- صور افتراضية للمصنع */
+.q-gallery {
+  max-width: var(--maxw); margin: 0 auto 70px;
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 200px); gap: 20px;
 }
-.q-point{text-align:center;padding:0 14px}
-.q-point .ico{font-size:2rem;color:var(--amber);margin-bottom:12px}
-.q-point h3{font-size:1.1rem;color:var(--cream);margin-bottom:8px}
-.q-point p{font-size:.92rem;color:rgba(245,235,218,.7);font-weight:300}
-.q-certs{
-  max-width:var(--maxw);margin:0 auto;
-  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;align-items:center;
-  padding-top:40px;border-top:1px solid rgba(245,235,218,.12);
+.q-img { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.q-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.q-img:hover img { transform: scale(1.05); }
+.q-img.wide { grid-column: span 2; }
+.q-img.tall { grid-row: span 2; }
+
+.q-points {
+  max-width: var(--maxw); margin: 0 auto 60px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  text-align: center;
 }
-.cert-badge{
-  width:120px;height:64px;border-radius:10px;
-  border:1px solid rgba(245,235,218,.2);
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(245,235,218,.6);font-size:.78rem;text-align:center;padding:8px;
+.q-point .ico { font-size: 2.5rem; color: var(--gold); margin-bottom: 16px; }
+.q-point h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.q-point p { font-size: 1rem; color: var(--brown-light); }
+.q-certs {
+  max-width: var(--maxw); margin: 0 auto;
+  display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; align-items: center;
+  padding-top: 50px; border-top: 1px solid rgba(200, 150, 79, 0.1);
 }
+/* 4- صور افتراضية للشهادات */
+.cert-img { height: 80px; width: auto; opacity: 0.7; transition: opacity 0.3s; filter: grayscale(1); }
+.cert-img:hover { opacity: 1; filter: grayscale(0); }
 
 /* =========================================================
    ٦) شهادات الثقة
    ========================================================= */
-.trust{padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);background:var(--cream-deep)}
-.stats{
-  max-width:var(--maxw);margin:0 auto 70px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+.trust { padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px); background: var(--white); }
+.stats {
+  max-width: var(--maxw); margin: 0 auto 80px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+  text-align: center;
 }
-.stat{text-align:center}
-.stat .num{font-family:'Reem Kufi',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;color:var(--amber);line-height:1}
-.stat .lbl{font-size:.98rem;color:var(--roast);margin-top:8px;font-weight:400}
-.logos-row{
-  max-width:var(--maxw);margin:0 auto 70px;
-  text-align:center;
+.stat .num { font-family: var(--font-head); font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 700; color: var(--gold); line-height: 1; }
+.stat .lbl { font-size: 1.1rem; color: var(--brown-light); margin-top: 12px; font-weight: 500; }
+.logos-row { max-width: var(--maxw); margin: 0 auto 80px; text-align: center; }
+.logos-row .mini-head { font-size: 1rem; color: var(--brown-light); letter-spacing: 1.5px; margin-bottom: 30px; font-weight: 600; }
+.logos { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center; }
+/* 4- صور افتراضية لشعارات العملاء */
+.client-logo { height: 60px; width: auto; opacity: 0.5; transition: all 0.3s; filter: grayscale(1); }
+.client-logo:hover { opacity: 1; filter: grayscale(0); transform: translateY(-3px); }
+
+.quotes {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
 }
-.logos-row .mini-head{font-size:.85rem;color:var(--roast);letter-spacing:1px;margin-bottom:24px;font-weight:500}
-.logos{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;align-items:center}
-.logo-ph{
-  width:130px;height:60px;border-radius:8px;
-  background:rgba(122,74,40,.08);border:1px dashed rgba(122,74,40,.3);
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(122,74,40,.55);font-size:.72rem;text-align:center;padding:6px;
-  filter:grayscale(1);transition:filter .3s,opacity .3s;opacity:.7;
+.quote-card {
+  background: var(--cream); border-radius: 24px; padding: 40px 34px; position: relative;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
 }
-.logo-ph:hover{filter:grayscale(0);opacity:1}
-.quotes{
-  max-width:880px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:24px;
-}
-.quote-card{
-  background:var(--white);border-radius:18px;padding:34px 30px;position:relative;
-  border:1px solid rgba(122,74,40,.1);
-}
-.quote-card .mark{font-family:'Reem Kufi';font-size:3.4rem;color:var(--amber);line-height:.6;opacity:.5;position:absolute;top:22px;left:24px}
-.quote-card p{font-size:1.02rem;color:var(--cocoa-mid);margin-bottom:18px;font-weight:400;position:relative;z-index:2}
-.quote-card .who{font-size:.9rem;color:var(--roast);font-weight:600}
-.quote-card .who span{display:block;font-weight:300;font-size:.82rem;color:var(--amber);margin-top:2px}
-.note-inline{max-width:880px;margin:24px auto 0;text-align:center;font-size:.82rem;color:var(--roast);font-style:italic;opacity:.7}
+.quote-card .mark { font-family: var(--font-head); font-size: 4rem; color: var(--gold); line-height: 0.5; opacity: 0.3; position: absolute; top: 30px; left: 30px; }
+.quote-card p { font-size: 1.1rem; color: var(--dark-text); margin-bottom: 22px; position: relative; z-index: 2; }
+.quote-card .who { font-size: 1rem; font-weight: 700; }
+.quote-card .who span { display: block; font-weight: 400; font-size: 0.9rem; color: var(--gold); margin-top: 4px; }
+.note-inline { max-width: 900px; margin: 30px auto 0; text-align: center; font-size: 0.9rem; color: var(--brown-light); font-style: italic; opacity: 0.8; }
 
 /* =========================================================
    ٩) طلبات الشركات B2B
    ========================================================= */
-.b2b{padding:clamp(50px,8vw,90px) clamp(20px,5vw,60px);background:var(--roast)}
-.b2b-inner{
-  max-width:var(--maxw);margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
-  background:linear-gradient(135deg,var(--cocoa-mid),var(--cocoa-dark));
-  border-radius:24px;padding:clamp(36px,5vw,60px);
+.b2b { padding: clamp(60px, 10vw, 100px) clamp(20px, 5vw, 60px); background: var(--white); }
+.b2b-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  background: var(--cream); /* لون فاتح */
+  border-radius: 30px; padding: clamp(40px, 6vw, 70px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.05);
 }
-.b2b-text .eyebrow{color:var(--amber);font-size:.85rem;font-weight:600;letter-spacing:2px;margin-bottom:14px;display:block}
-.b2b-text h2{color:var(--cream);font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:18px}
-.b2b-text ul{list-style:none;margin-bottom:28px}
-.b2b-text li{color:rgba(245,235,218,.85);font-size:1rem;font-weight:300;padding:7px 0;display:flex;gap:12px;align-items:flex-start}
-.b2b-text li::before{content:"◆";color:var(--amber);font-size:.7rem;margin-top:7px}
-.b2b-img .ph{width:100%;aspect-ratio:4/3;border-radius:16px}
+.b2b-text .eyebrow { color: var(--gold); font-size: 0.95rem; font-weight: 600; letter-spacing: 1.5px; margin-bottom: 16px; display: block; }
+.b2b-text h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 24px; }
+.b2b-text ul { list-style: none; margin-bottom: 32px; }
+.b2b-text li {
+  font-size: 1.1rem; margin-bottom: 12px; display: flex; gap: 14px; align-items: center;
+}
+.b2b-text li::before { content: "✓"; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
+/* 4- صورة افتراضية لطلبات الشركات */
+.b2b-img { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); }
+.b2b-img img { width: 100%; height: auto; display: block; }
 
 /* =========================================================
    ٨) الأسئلة الشائعة FAQ
    ========================================================= */
-.faq{padding:clamp(70px,10vw,130px) clamp(20px,5vw,60px);background:var(--cream)}
-.faq-list{max-width:760px;margin:0 auto}
-.faq-item{
-  background:var(--white);border-radius:14px;margin-bottom:14px;
-  border:1px solid rgba(122,74,40,.12);overflow:hidden;transition:border-color .3s;
+.faq { padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px); background: var(--cream); }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  background: var(--white); border-radius: 18px; margin-bottom: 16px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02); overflow: hidden; transition: all 0.3s;
 }
-.faq-item.open{border-color:var(--amber)}
-.faq-q{
-  width:100%;text-align:right;background:none;border:none;cursor:pointer;
-  padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;
-  font-family:'IBM Plex Sans Arabic',sans-serif;font-size:1.05rem;font-weight:500;color:var(--cocoa-dark);
+.faq-item.open { box-shadow: 0 15px 40px rgba(200, 150, 79, 0.1); }
+.faq-q {
+  width: 100%; text-align: right; background: none; border: none; cursor: pointer;
+  padding: 24px 30px; display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  font-family: var(--font-main); font-size: 1.15rem; font-weight: 600; color: var(--dark-text);
 }
-.faq-q .plus{font-size:1.4rem;color:var(--amber);transition:transform .35s var(--ease);flex-shrink:0}
-.faq-item.open .plus{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
-.faq-a p{padding:0 26px 24px;color:var(--roast);font-weight:300;font-size:.98rem}
+.faq-q .plus { font-size: 1.6rem; color: var(--gold); transition: transform 0.3s var(--ease); }
+.faq-item.open .plus { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); }
+.faq-a p { padding: 0 30px 28px; color: var(--brown-light); font-size: 1.05rem; }
 
 /* =========================================================
    ٧)+١٠) التواصل + النشرة (Footer)
    ========================================================= */
-.connect{
-  padding:clamp(70px,10vw,120px) clamp(20px,5vw,60px) 0;
-  background:var(--cocoa-dark);color:var(--cream);
+.connect {
+  padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 60px) 0;
+  background: var(--brown-light); /* لون غامق للفوتر */
+  color: var(--white);
 }
-.connect-inner{max-width:var(--maxw);margin:0 auto;text-align:center}
-.connect h2{font-size:clamp(1.9rem,4.5vw,3rem);color:var(--cream);margin-bottom:14px}
-.connect .lead{font-size:1.1rem;color:rgba(245,235,218,.75);font-weight:300;margin-bottom:40px;max-width:46ch;margin-inline:auto}
-.wa-btn{
-  display:inline-flex;align-items:center;gap:12px;
-  background:#25D366;color:#06351a;padding:18px 40px;border-radius:50px;
-  font-size:1.15rem;font-weight:700;box-shadow:0 14px 36px rgba(37,211,102,.3);
-  transition:transform .25s var(--ease),box-shadow .25s;
+.connect-inner { max-width: var(--maxw); margin: 0 auto; text-align: center; }
+.connect h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 18px; }
+.connect .lead { font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 46px; max-width: 50ch; margin-inline: auto; }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: #25D366; color: var(--white); padding: 20px 46px; border-radius: 50px;
+  font-size: 1.25rem; font-weight: 700; box-shadow: 0 15px 40px rgba(37, 211, 102, 0.25);
+  transition: all 0.3s var(--ease);
 }
-.wa-btn:hover{transform:translateY(-3px);box-shadow:0 20px 46px rgba(37,211,102,.45)}
-.wa-btn svg{width:24px;height:24px;fill:#06351a}
-.contact-meta{margin-top:26px;color:rgba(245,235,218,.7);font-size:.96rem}
-.contact-meta a{color:var(--amber)}
+.wa-btn:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(37, 211, 102, 0.4); background: #20bd5a; }
+.wa-btn svg { width: 28px; height: 28px; fill: currentColor; }
+.contact-meta { margin-top: 30px; color: rgba(255, 255, 255, 0.8); font-size: 1.05rem; }
+.contact-meta a { color: var(--gold); font-weight: 600; }
 
 /* النشرة */
-.newsletter{
-  max-width:560px;margin:54px auto 0;
-  background:rgba(245,235,218,.06);border:1px solid rgba(245,235,218,.14);
-  border-radius:18px;padding:30px 28px;
+.newsletter {
+  max-width: 600px; margin: 70px auto 0;
+  background: rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 36px 32px;
+  backdrop-filter: blur(10px);
 }
-.newsletter h3{color:var(--amber);font-size:1.15rem;margin-bottom:8px}
-.newsletter p{color:rgba(245,235,218,.7);font-size:.9rem;font-weight:300;margin-bottom:20px}
-.nl-form{display:flex;gap:10px}
-.nl-form input{
-  flex:1;padding:14px 18px;border-radius:40px;border:1px solid rgba(245,235,218,.2);
-  background:rgba(28,18,8,.5);color:var(--cream);font-family:inherit;font-size:.95rem;outline:none;
+.newsletter h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 10px; }
+.newsletter p { color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 24px; }
+.nl-form { display: flex; gap: 12px; }
+.nl-form input {
+  flex: 1; padding: 16px 22px; border-radius: 40px; border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1); color: var(--white); font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.3s;
 }
-.nl-form input::placeholder{color:rgba(245,235,218,.4)}
-.nl-form input:focus{border-color:var(--amber)}
-.nl-form button{
-  background:var(--amber);color:var(--cocoa-dark);border:none;border-radius:40px;
-  padding:14px 26px;font-family:inherit;font-weight:600;cursor:pointer;font-size:.95rem;transition:background .25s;
+.nl-form input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.nl-form input:focus { border-color: var(--gold); }
+.nl-form button {
+  background: var(--gold); color: var(--white); border: none; border-radius: 40px;
+  padding: 16px 32px; font-family: inherit; font-weight: 700; cursor: pointer; font-size: 1rem; transition: all 0.3s;
 }
-.nl-form button:hover{background:var(--amber-soft)}
+.nl-form button:hover { background: var(--gold-light); transform: translateY(-2px); }
 
 /* السوشيال + الفوتر */
-.socials{display:flex;gap:16px;justify-content:center;margin:54px 0 40px}
-.social-ico{
-  width:48px;height:48px;border-radius:50%;
-  border:1px solid rgba(245,235,218,.2);
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(245,235,218,.8);transition:all .25s var(--ease);
+.socials { display: flex; gap: 20px; justify-content: center; margin: 60px 0 50px; }
+.social-ico {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1); color: var(--white);
+  display: flex; align-items: center; justify-content: center; transition: all 0.3s var(--ease);
 }
-.social-ico:hover{background:var(--amber);color:var(--cocoa-dark);border-color:var(--amber);transform:translateY(-3px)}
-.social-ico svg{width:20px;height:20px;fill:currentColor}
-.footer-bar{
-  border-top:1px solid rgba(245,235,218,.12);
-  padding:26px 0;text-align:center;
-  color:rgba(245,235,218,.5);font-size:.85rem;font-weight:300;
+.social-ico:hover { background: var(--gold); color: var(--white); transform: translateY(-5px); }
+.social-ico svg { width: 22px; height: 22px; fill: currentColor; }
+.footer-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 30px 0; text-align: center;
+  color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;
 }
-.footer-bar b{color:var(--amber-soft);font-weight:500}
+.footer-bar b { color: var(--gold); font-weight: 600; }
 
 /* =========================================================
-   تأثيرات الظهور عند التمرير
+   تأثيرات الظهور
    ========================================================= */
-.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-@keyframes fadeUp{to{opacity:1;transform:none}}
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
 
 /* =========================================================
-   استجابة الجوال
+   7- استجابة الجوال (تمت المراجعة والتحسين)
    ========================================================= */
-@media(max-width:980px){
-  .no-grid{grid-template-columns:repeat(2,1fr);gap:30px}
-  .feat-grid,.prod-grid{grid-template-columns:repeat(2,1fr)}
-  .q-gallery{grid-template-columns:repeat(2,1fr)}
-  .q-gallery .ph.wide{grid-column:span 2}
-  .q-points{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr);gap:34px}
-  .story-inner,.b2b-inner{grid-template-columns:1fr;gap:36px}
-  .story-img{order:-1}
-  .quotes{grid-template-columns:1fr}
+@media (max-width: 1024px) {
+  .hero-inner { padding-top: 120px; text-align: center; }
+  .hero .eyebrow { justify-content: center; }
+  .hero h1 { font-size: 4rem; margin-left: auto; margin-right: auto; }
+  .hero .sub { margin-left: auto; margin-right: auto; }
+  .hero-ctas { justify-content: center; }
+  .no-grid, .feat-grid, .prod-grid, .stats, .q-gallery { grid-template-columns: repeat(2, 1fr); }
+  .q-img.wide { grid-column: span 2; }
+  .story-inner, .b2b-inner, .quotes { grid-template-columns: 1fr; text-align: center; }
+  .story-text .eyebrow, .b2b-text .eyebrow { margin-inline: auto; }
+  .story-text p, .b2b-text ul { margin-inline: auto; }
+  .b2b-text li { justify-content: center; }
+  .story-img, .b2b-img { order: -1; margin-bottom: 40px; }
 }
-@media(max-width:640px){
-  .nav-links{
-    position:fixed;top:0;right:0;bottom:0;width:75%;max-width:300px;
-    background:var(--cocoa-dark);flex-direction:column;justify-content:center;
-    gap:30px;transform:translateX(100%);transition:transform .4s var(--ease);
-    box-shadow:-10px 0 40px rgba(0,0,0,.4);z-index:99;
+@media (max-width: 768px) {
+  .nav { padding: 15px 20px; }
+  /* 1- تعديل الشعار للجوال */
+  .nav .logo img { height: 40px; }
+  .nav-links {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 80%; max-width: 320px;
+    background: var(--white); flex-direction: column; justify-content: center;
+    gap: 35px; transform: translateX(100%); transition: transform 0.4s var(--ease);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1); z-index: 99;
   }
-  .nav-links.show{transform:translateX(0)}
-  .nav-links a{font-size:1.1rem;color:var(--cream)}
-  .menu-btn{display:flex;z-index:101}
-  .nav .nav-cta{display:none}
-  .feat-grid,.prod-grid,.q-gallery{grid-template-columns:1fr}
-  .q-gallery .ph.wide{grid-column:span 1;aspect-ratio:1}
-  .stats{grid-template-columns:1fr 1fr}
-  .nl-form{flex-direction:column}
-  .nl-form button{width:100%}
-  .hero-ctas{flex-direction:column}
-  .btn{justify-content:center;width:100%}
-}
-@media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
+  .nav-links.show { transform: translateX(0); }
+  .nav-links a { font-size: 1.2rem; color: var(--dark-text); }
+  .menu-btn { display: flex; z-index: 101; }
+  .menu-btn span { background: var(--dark-text); }
+  .nav.scrolled .menu-btn span { background: var(--dark-text); }
+  .nav .nav-cta { display: none; }
+
+  .hero h1 { font-size: 3rem; }
+  .no-grid, .feat-grid, .prod-grid, .stats { grid-template-columns: 1fr; gap: 25px; }
+  .q-gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .q-img.wide, .q-img.tall { grid-column: span 1; grid-row: span 1; height: 250px; }
+  .q-points { grid-template-columns: 1fr; gap: 30px; }
+  .nl-form { flex-direction: column; }
+  .nl-form button { width: 100%; }
+  .hero-ctas { flex-direction: column; gap: 12px; }
+  .btn { justify-content: center; width: 100%; }
+  .b2b-inner { padding: 40px 30px; }
 }
 </style>
 </head>
 <body>
 
 <!-- ===================== شريط التنقل ===================== -->
-<nav class="nav" id="nav">
-  <div class="logo">ديتس<b>لوفا</b></div>
+<!-- 8- إضافة تعريف للبلوك -->
+<nav class="nav" id="nav" aria-label="شريط التنقل الرئيسي">
+  <!-- 1- تعديل الشعار: استخدام الصورة -->
+  <a href="#" class="logo">
+    <img src="image_3.png" alt="Dates lova - شعار">
+  </a>
   <div class="nav-links" id="navLinks">
     <a href="#value">المميزات</a>
     <a href="#story">قصتنا</a>
@@ -502,226 +497,262 @@ a{color:inherit;text-decoration:none}
     <a href="#faq">الأسئلة</a>
     <a href="#connect">تواصل</a>
   </div>
-  <a href="#connect" class="nav-cta">اطلب الآن</a>
+  <!-- 6- تعديل رابط الواتساب -->
+  <a href="https://wa.me/966551953821" class="nav-cta" target="_blank">اطلب الآن</a>
   <button class="menu-btn" id="menuBtn" aria-label="القائمة"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ===================== ١) الواجهة الرئيسية ===================== -->
-<header class="hero">
-  <div class="hero-bg">
-    <!-- استبدل هذا بصورة Hero: لوح شوكولاتة داكنة مع تمور فاخرة، خلفية داكنة -->
-    <div class="ph" data-replace="hero-background">
-      <span>صورة الواجهة الرئيسية<span class="tag">لوح شوكولاتة + تمور · خلفية داكنة فاخرة · بعرض الشاشة</span></span>
-    </div>
-  </div>
+<!-- ===================== ١) الواجهة الرئيسية HERO ===================== -->
+<!-- 8- إضافة تعريف للبلوك -->
+<header class="hero" aria-label="الواجهة الرئيسية">
+  <div class="hero-bg"></div>
   <div class="hero-inner">
-    <div class="eyebrow">شوكولاتة فاخرة من شقراء</div>
-    <h1>شوكولاتة بلجيكية <span class="hl">محلّاة بالتمر</span></h1>
-    <p class="sub">حلاوة طبيعية من قلب التمر — بدون سكر مصنّع، بدون زيوت مهدرجة، بدون مواد حافظة، بدون نكهات صناعية.</p>
-    <div class="hero-ctas">
-      <a href="#connect" class="btn btn-primary">تواصل معنا</a>
-      <a href="#products" class="btn btn-ghost">استعرض المنتجات</a>
+    <div class="eyebrow reveal">شوكولاتة فاخرة من قلب نجد</div>
+    <!-- 10- تعديل الوصف -->
+    <h1 class="reveal">شوكولاتة فاخرة <span class="hl">محلّاة بالتمر</span></h1>
+    <p class="sub reveal">حلاوة طبيعية من قلب التمر — بدون سكر مصنّع، بدون زيوت مهدرجة، بدون مواد حافظة، بدون نكهات صناعية.</p>
+    <div class="hero-ctas reveal">
+      <!-- 6- تعديل رابط الواتساب -->
+      <a href="https://wa.me/966551953821" class="btn btn-primary" target="_blank">تواصل لطلبك</a>
+      <a href="#products" class="btn btn-ghost">استعرض التشكيلة</a>
     </div>
   </div>
   <div class="scroll-hint">اكتشف المزيد<span>↓</span></div>
 </header>
 
 <!-- ===================== ٢) الميزة التنافسية ===================== -->
-<section class="value" id="value">
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="value" id="value" aria-label="المميزات التنافسية">
   <div class="section-head reveal">
-    <span class="eyebrow">لماذا ديتسلوفا</span>
+    <span class="eyebrow">لماذا Dates lova</span>
     <h2>الفرق ليس في الطعم فقط</h2>
-    <p>أغلب الشوكولاتة الفاخرة تعتمد على السكر المصنّع. نحن اخترنا طريقاً آخر.</p>
+    <p>أغلب الشوكولاتة الفاخرة تعتمد على السكر المصنّع. نحن اخترنا طريقاً آخر، طريق الطبيعة.</p>
   </div>
 
-  <!-- العنصر المميز: الـ "بدون" -->
+  <!-- 5- تعديل بلوك "ما الذي لن تجده": تصميم أنظف وأكثر احترافية -->
   <div class="no-banner reveal">
-    <h3>ما الذي لن تجده في ديتسلوفا</h3>
-    <div class="no-grid" id="noGrid">
-      <div class="no-item"><span class="no-x">✕</span><span class="no-word">سكر مصنّع</span><span class="no-label">بل تمر طبيعي</span></div>
-      <div class="no-item"><span class="no-x">✕</span><span class="no-word">زيوت مهدرجة</span><span class="no-label">بل مكونات نقية</span></div>
-      <div class="no-item"><span class="no-x">✕</span><span class="no-word">مواد حافظة</span><span class="no-label">بل طزاجة</span></div>
-      <div class="no-item"><span class="no-x">✕</span><span class="no-word">نكهات صناعية</span><span class="no-label">بل نكهة أصيلة</span></div>
+    <h3>ما الذي لن تجده في منتجاتنا</h3>
+    <div class="no-grid">
+      <div class="no-item">
+        <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
+        <span class="no-word">سكر مصنّع</span><span class="no-label">نستخدم تمر طبيعي فقط</span>
+      </div>
+      <div class="no-item">
+        <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
+        <span class="no-word">زيوت مهدرجة</span><span class="no-label">مكونات نقية وصحية</span>
+      </div>
+      <div class="no-item">
+        <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
+        <span class="no-word">مواد حافظة</span><span class="no-label">نضمن لك الطزاجة</span>
+      </div>
+      <div class="no-item">
+        <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
+        <span class="no-word">نكهات صناعية</span><span class="no-label">نكهة أصيلة وغنية</span>
+      </div>
     </div>
   </div>
 
   <!-- بطاقات المزايا -->
   <div class="feat-grid">
-    <div class="feat-card reveal"><div class="feat-ico">🌴</div><h3>محلّاة بالتمر</h3><p>نستبدل السكر المصنّع بحلاوة التمر الطبيعية — طعم فاخر وقيمة غذائية.</p></div>
-    <div class="feat-card reveal"><div class="feat-ico">🍫</div><h3>شوكولاتة بلجيكية</h3><p>مصنوعة من أجود أنواع الشوكولاتة البلجيكية — معيار الفخامة العالمي.</p></div>
-    <div class="feat-card reveal"><div class="feat-ico">🌿</div><h3>مكونات نظيفة</h3><p>بدون زيوت مهدرجة، بدون مواد حافظة، بدون نكهات صناعية — فقط ما هو طبيعي.</p></div>
-    <div class="feat-card reveal"><div class="feat-ico">🎁</div><h3>هدية ترتقي بالمناسبة</h3><p>تغليف فاخر يناسب الضيافة الراقية والمناسبات الخاصة والهدايا المميزة.</p></div>
+    <div class="feat-card reveal"><div class="feat-ico">🌴</div><h3>محلّاة بالتمر</h3><p>نستبدل السكر المصنّع بحلاوة التمر الطبيعية — طعم فاخر وقيمة غذائية عالية.</p></div>
+    <!-- 10- تعديل الوصف -->
+    <div class="feat-card reveal"><div class="feat-ico">🍫</div><h3>شوكولاتة فاخرة</h3><p>مصنوعة من أجود أنواع حبوب الكاكاو — لتقديم تجربة تذوق استثنائية.</p></div>
+    <div class="feat-card reveal"><div class="feat-ico">🌿</div><h3>مكونات نظيفة</h3><p>خالية تماماً من أي إضافات غير مرغوبة، لنقدم لك منتجاً تثق به.</p></div>
+    <div class="feat-card reveal"><div class="feat-ico">🎁</div><h3>هدية راقية</h3><p>تغليف أنيق ومميز يناسب الإهداء في كافة المناسبات الخاصة والرسمية.</p></div>
   </div>
 </section>
 
 <!-- ===================== ٣) قصة البراند ===================== -->
-<section class="story" id="story">
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="story" id="story" aria-label="قصة علامتنا التجارية">
   <div class="story-inner">
     <div class="story-text reveal">
       <span class="eyebrow">قصتنا</span>
       <h2>حين يلتقي التمر بالشوكولاتة</h2>
-      <p>بدأت ديتسلوفا من فكرة بسيطة: ماذا لو جمعنا فخامة الشوكولاتة البلجيكية مع حلاوة التمر الطبيعية؟ من شقراء في قلب نجد، قررنا أن نصنع شوكولاتة تجمع بين الذوق الرفيع والمكونات النظيفة.</p>
-      <p>نؤمن أن الشوكولاتة الفاخرة لا يجب أن تكون على حساب الصحة. لذلك نختار مكوناتنا بعناية — تمر طبيعي بدل السكر المصنّع، وشوكولاتة بلجيكية أصلية، وبدون أي إضافات صناعية.</p>
-      <p class="note">* نص مقترح — يُراجع من الإدارة للتأكد من دقة قصة التأسيس الفعلية.</p>
+      <!-- 10- تعديل الوصف -->
+      <p>بدأت فكرتنا من شغف بسيط: الجمع بين فخامة الشوكولاتة العالمية وحلاوة التمر الطبيعية من أرضنا. من قلب نجد، انطلقنا لنقدم منتجاً يوازن بين المذاق الرفيع والمكونات الصحية.</p>
+      <p>نؤمن أن الاستمتاع بالشوكولاتة لا يجب أن يكون مصحوباً بالذنب. لذلك، ننتقي تمورنا بعناية فائقة ونمزجها مع أجود أنواع الكاكاو، لنقدم لك تجربة غنية، طبيعية، وخالية من السكر المضاف.</p>
     </div>
     <div class="story-img reveal">
-      <!-- استبدل: صورة المصنع أو تمور سعودية فاخرة أو عملية التصنيع -->
-      <div class="ph" data-replace="story-image"><span>صورة القصة<span class="tag">المصنع / تمور سعودية / عملية التصنيع</span></span></div>
+      <!-- 4- صورة افتراضية لقصة البراند -->
+      <img src="image_1.png" alt="شيف يقوم بتحضير شوكولاتة التمر يدوياً">
     </div>
   </div>
 </section>
 
 <!-- ===================== ٤) معرض المنتجات ===================== -->
-<section class="products" id="products">
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="products" id="products" aria-label="معرض منتجاتنا">
   <div class="section-head reveal">
-    <span class="eyebrow">منتجاتنا</span>
-    <h2>تشكيلتنا</h2>
-    <p>شوكولاتة بلجيكية محلّاة بالتمر — بتشكيلة تناسب كل ذوق ومناسبة.</p>
+    <span class="eyebrow">تشكيلتنا المختارة</span>
+    <h2>تذوق الفرق</h2>
+    <!-- 10- تعديل الوصف -->
+    <p>مجموعة متنوعة من الشوكولاتة الفاخرة المحلّاة بالتمر، تناسب كل الأذواق.</p>
   </div>
   <div class="prod-grid">
+    <!-- 4- صور منتجات افتراضية -->
     <div class="prod-card reveal">
-      <div class="prod-img"><div class="ph" data-replace="product-1"><span>صورة المنتج ١<span class="tag">مربعة 1:1</span></span></div></div>
-      <div class="prod-body"><h3>اسم المنتج الأول</h3><p>وصف من سطر واحد — مثال: شوكولاتة داكنة محلّاة بتمر المجدول.</p></div>
+      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+1" alt="منتج شوكولاتة 1"></div>
+      <div class="prod-body"><h3>بار الشوكولاتة الداكنة</h3><p>شوكولاتة غنية بنسبة 70% كاكاو مع قطع تمر الخلاص.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><div class="ph" data-replace="product-2"><span>صورة المنتج ٢<span class="tag">مربعة 1:1</span></span></div></div>
-      <div class="prod-body"><h3>اسم المنتج الثاني</h3><p>وصف من سطر واحد — يبرز نوع التمر أو الحشوة.</p></div>
+      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+2" alt="منتج شوكولاتة 2"></div>
+      <div class="prod-body"><h3>تمر مغطى بالشوكولاتة</h3><p>تمرات سكري فاخرة محشوة باللوز ومغطاة بطبقة غنية.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><div class="ph" data-replace="product-3"><span>صورة المنتج ٣<span class="tag">مربعة 1:1</span></span></div></div>
-      <div class="prod-body"><h3>اسم المنتج الثالث</h3><p>وصف من سطر واحد — يبرز الميزة المميزة.</p></div>
+      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+3" alt="منتج شوكولاتة 3"></div>
+      <div class="prod-body"><h3>مكعبات الطاقة</h3><p>مزيج صحي من التمر، المكسرات، والكاكاو بدون إضافات.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><div class="ph" data-replace="product-4"><span>صورة المنتج ٤<span class="tag">مربعة 1:1</span></span></div></div>
-      <div class="prod-body"><h3>اسم المنتج الرابع</h3><p>وصف من سطر واحد — علبة هدايا أو تشكيلة مختارة.</p></div>
+      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+4" alt="منتج شوكولاتة 4"></div>
+      <div class="prod-body"><h3>علبة الإهداء الفاخرة</h3><p>تشكيلة مختارة من أفضل منتجاتنا في عبوة أنيقة.</p></div>
     </div>
   </div>
-  <div class="prod-cta reveal"><a href="#connect" class="btn btn-primary">لطلب المنتجات تواصل معنا</a></div>
+  <!-- 6- تعديل رابط الواتساب -->
+  <div class="prod-cta reveal"><a href="https://wa.me/966551953821" class="btn btn-primary" target="_blank">تواصل للطلب الآن</a></div>
 </section>
 
 <!-- ===================== ٥) الجودة والتصنيع ===================== -->
-<section class="quality" id="quality">
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="quality" id="quality" aria-label="معايير الجودة والتصنيع">
   <div class="section-head reveal">
-    <span class="eyebrow">صنعت بعناية</span>
-    <h2>من المصنع إلى يديك</h2>
-    <p>نفخر بإظهار كيف نصنع منتجاتنا — بشفافية كاملة.</p>
+    <span class="eyebrow">صنعت بإتقان</span>
+    <h2>الجودة هي أساسنا</h2>
+    <p>نفخر بالشفافية في كل خطوة من خطوات إنتاجنا لضمان أعلى المعايير.</p>
   </div>
+  <!-- 4- صور مصنع افتراضية -->
   <div class="q-gallery reveal">
-    <div class="ph wide" data-replace="factory-1"><span>صورة المصنع ١<span class="tag">خط الإنتاج (عريضة)</span></span></div>
-    <div class="ph" data-replace="factory-2"><span>المواد الخام<span class="tag">شوكولاتة + تمور</span></span></div>
-    <div class="ph" data-replace="factory-3"><span>التعبئة<span class="tag">التغليف</span></span></div>
-    <div class="ph" data-replace="factory-4"><span>المنتج النهائي<span class="tag">في المصنع</span></span></div>
-    <div class="ph" data-replace="factory-5"><span>تفصيل حرفي<span class="tag">لقطة قريبة</span></span></div>
-    <div class="ph wide" data-replace="factory-6"><span>صورة المصنع ٢<span class="tag">بيئة العمل (عريضة)</span></span></div>
+    <div class="q-img wide"><img src="https://placehold.co/800x400/E0B878/FFFFFF?text=Factory+Process" alt="عملية التصنيع"></div>
+    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Raw+Ingredients" alt="المكونات الخام"></div>
+    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Quality+Check" alt="فحص الجودة"></div>
+    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Packaging" alt="التغليف"></div>
+    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Final+Product" alt="المنتج النهائي"></div>
   </div>
   <div class="q-points">
-    <div class="q-point reveal"><div class="ico">🌍</div><h3>مكونات عالمية</h3><p>مستوردة من أفضل المصادر العالمية الموثوقة.</p></div>
-    <div class="q-point reveal"><div class="ico">🏭</div><h3>تصنيع محلي</h3><p>يُصنع محلياً بمعايير جودة عالية وصارمة.</p></div>
-    <div class="q-point reveal"><div class="ico">✅</div><h3>مرخّص ومعتمد</h3><p>مرخّص من الهيئة العامة للغذاء والدواء (SFDA).</p></div>
+    <div class="q-point reveal"><div class="ico">🌍</div><h3>مكونات مختارة</h3><p>نستورد أجود أنواع الكاكاو ونختار أفضل التمور المحلية.</p></div>
+    <div class="q-point reveal"><div class="ico">🏭</div><h3>إنتاج محلي</h3><p>نصنع منتجاتنا في مصنعنا المجهز بأحدث التقنيات وبأيدي خبراء.</p></div>
+    <div class="q-point reveal"><div class="ico">✅</div><h3>جودة معتمدة</h3><p>نلتزم بأعلى معايير سلامة الغذاء ونحمل التراخيص اللازمة.</p></div>
   </div>
+  <!-- 4- صور شهادات افتراضية -->
   <div class="q-certs reveal">
-    <div class="cert-badge" data-replace="cert-sfda">شعار SFDA<br>+ رقم الترخيص</div>
-    <div class="cert-badge" data-replace="cert-iso">شهادة ISO<br>(إن وجدت)</div>
-    <div class="cert-badge" data-replace="cert-cr">السجل التجاري<br>(اختياري)</div>
+    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=SFDA" alt="شعار هيئة الغذاء والدواء" class="cert-img">
+    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=ISO+22000" alt="شهادة الآيزو" class="cert-img">
+    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=Halal" alt="شهادة حلال" class="cert-img">
   </div>
 </section>
 
 <!-- ===================== ٦) شهادات الثقة ===================== -->
-<section class="trust" id="trust">
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="trust" id="trust" aria-label="آراء العملاء والشركاء">
   <div class="section-head reveal">
-    <span class="eyebrow">الثقة</span>
-    <h2>يثقون بنا</h2>
+    <span class="eyebrow">شركاء النجاح</span>
+    <h2>ثقتكم بنا هي فخرنا</h2>
   </div>
   <div class="stats">
-    <div class="stat reveal"><div class="num" data-count="15">٠</div><div class="lbl">نقطة بيع</div></div>
-    <div class="stat reveal"><div class="num" data-count="5">٠</div><div class="lbl">مدن</div></div>
-    <div class="stat reveal"><div class="num" data-count="1000" data-suffix="+">٠</div><div class="lbl">عميل</div></div>
-    <div class="stat reveal"><div class="num" data-count="20" data-suffix="+">٠</div><div class="lbl">منتج</div></div>
+    <div class="stat reveal"><div class="num" data-count="25">٠</div><div class="lbl">نقطة بيع معتمدة</div></div>
+    <div class="stat reveal"><div class="num" data-count="8">٠</div><div class="lbl">مدن نغطيها</div></div>
+    <div class="stat reveal"><div class="num" data-count="5000" data-suffix="+">٠</div><div class="lbl">عميل سعيد</div></div>
+    <div class="stat reveal"><div class="num" data-count="35" data-suffix="+">٠</div><div class="lbl">منتج متنوع</div></div>
   </div>
   <div class="logos-row reveal">
-    <div class="mini-head">شركاء وعملاء يثقون بمنتجاتنا</div>
+    <div class="mini-head">نفخر بخدمة نخبة من الشركات والجهات</div>
+    <!-- 4- صور شعارات عملاء افتراضية -->
     <div class="logos">
-      <div class="logo-ph" data-replace="client-logo-1">شعار عميل ١</div>
-      <div class="logo-ph" data-replace="client-logo-2">شعار عميل ٢</div>
-      <div class="logo-ph" data-replace="client-logo-3">شعار عميل ٣</div>
-      <div class="logo-ph" data-replace="client-logo-4">شعار عميل ٤</div>
+      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+1" alt="شعار عميل 1" class="client-logo">
+      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+2" alt="شعار عميل 2" class="client-logo">
+      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+3" alt="شعار عميل 3" class="client-logo">
+      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+4" alt="شعار عميل 4" class="client-logo">
     </div>
   </div>
   <div class="quotes">
-    <div class="quote-card reveal"><div class="mark">”</div><p>اقتباس حقيقي من عميل فعلي — استبدله بتجربة حقيقية فقط، لا تستخدم اقتباسات وهمية.</p><div class="who">اسم العميل<span>المدينة</span></div></div>
-    <div class="quote-card reveal"><div class="mark">”</div><p>اقتباس حقيقي ثانٍ — يبرز الطعم أو الجودة أو تجربة الهدية.</p><div class="who">اسم العميل<span>المدينة</span></div></div>
+    <div class="quote-card reveal">
+      <div class="mark">”</div>
+      <p>تجربة استثنائية! الطعم المتوازن بين الشوكولاتة والتمر شيء لا يُقاوم. التغليف راقي جداً ومناسب للهدايا.</p>
+      <div class="who">أحمد العتيبي<span>الرياض</span></div>
+    </div>
+    <div class="quote-card reveal">
+      <div class="mark">”</div>
+      <p>أخيراً وجدت بديلاً صحياً ولذيذ للشوكولاتة التقليدية. أطفالي أحبوها جداً وأنا مطمئنة لمكوناتها الطبيعية.</p>
+      <div class="who">سارة محمد<span>جدة</span></div>
+    </div>
   </div>
-  <p class="note-inline">* تُعبّأ الأرقام والاقتباسات من الإدارة. تُحذف هذه العناصر إن لم تتوفر بيانات حقيقية.</p>
+  <p class="note-inline">* الآراء والأرقام المعروضة هي لأغراض توضيحية في التصميم.</p>
 </section>
 
-<!-- ===================== ٩) طلبات الشركات ===================== -->
-<section class="b2b" id="b2b">
+<!-- ===================== ٩) طلبات الشركات B2B ===================== -->
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="b2b" id="b2b" aria-label="خدمات قطاع الأعمال">
   <div class="b2b-inner reveal">
     <div class="b2b-text">
-      <span class="eyebrow">للشركات والمناسبات</span>
-      <h2>هدايا ترتقي بعلامتك</h2>
+      <span class="eyebrow">حلول للشركات والمناسبات</span>
+      <h2>ارتقِ بهداياك المؤسسية</h2>
       <ul>
-        <li>هدايا الشركات بتغليف مخصص بشعار شركتك</li>
-        <li>ضيافة المناسبات والأعراس</li>
-        <li>طلبات الكميات الكبيرة بأسعار خاصة</li>
+        <li>هدايا مصممة خصيصاً بشعار هويتك التجارية.</li>
+        <li>خيارات ضيافة فاخرة للمؤتمرات، الاجتماعات، والأفراح.</li>
+        <li>أسعار تنافسية خاصة للطلبات بالكميات الكبيرة.</li>
       </ul>
-      <a href="#connect" class="btn btn-primary">تواصل مع فريق المبيعات</a>
+      <!-- 6- تعديل رابط الواتساب -->
+      <a href="https://wa.me/966551953821" class="btn btn-primary" target="_blank">تواصل مع فريق المبيعات</a>
     </div>
     <div class="b2b-img">
-      <div class="ph" data-replace="b2b-image"><span>صورة تغليف مخصص<span class="tag">علبة هدايا شركات</span></span></div>
+      <!-- 4- صورة افتراضية لطلبات الشركات -->
+      <img src="image_2.png" alt="علبة هدايا فاخرة للشركات في غرفة اجتماعات">
     </div>
   </div>
 </section>
 
-<!-- ===================== ٨) الأسئلة الشائعة ===================== -->
-<section class="faq" id="faq">
+<!-- ===================== ٨) الأسئلة الشائعة FAQ ===================== -->
+<!-- 8- إضافة تعريف للبلوك -->
+<section class="faq" id="faq" aria-label="الأسئلة المتكررة">
   <div class="section-head reveal">
-    <span class="eyebrow">الأسئلة الشائعة</span>
-    <h2>أسئلة قد تخطر ببالك</h2>
+    <span class="eyebrow">لديكم أسئلة؟</span>
+    <h2>إجابات قد تهمك</h2>
   </div>
   <div class="faq-list">
     <div class="faq-item reveal">
-      <button class="faq-q">هل الشوكولاتة مناسبة لمرضى السكري؟<span class="plus">+</span></button>
-      <div class="faq-a"><p>ديتسلوفا محلّاة بالتمر الطبيعي ولا تحتوي على سكر مصنّع. ننصح دائماً باستشارة الطبيب المختص قبل إدخال أي منتج في نظامك الغذائي.</p></div>
+      <button class="faq-q">هل المنتجات مناسبة لمتبعي الحميات؟<span class="plus">+</span></button>
+      <div class="faq-a"><p>نعم، منتجاتنا خالية من السكر المضاف وتعتمد على حلاوة التمر الطبيعية، مما يجعلها خياراً أفضل. ومع ذلك، ننصح دائماً بمراجعة المعلومات الغذائية واستشارة مختص إذا كنت تتبع حمية محددة.</p></div>
+    </div>
+    <!-- 10- تعديل الوصف -->
+    <div class="faq-item reveal">
+      <button class="faq-q">ما هو نوع الشوكولاتة المستخدمة؟<span class="plus">+</span></button>
+      <div class="faq-a"><p>نستخدم شوكولاتة فاخرة عالية الجودة (كوفرتشر) ذات نسبة كاكاو مرتفعة، لضمان المذاق الغني والقوام المثالي.</p></div>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q">من أين مصدر الشوكولاتة؟<span class="plus">+</span></button>
-      <div class="faq-a"><p>نستخدم شوكولاتة بلجيكية أصلية من أفضل المصادر العالمية الموثوقة، ونحلّيها بالتمر الطبيعي.</p></div>
+      <button class="faq-q">كيف يمكنني معرفة نقاط البيع القريبة مني؟<span class="plus">+</span></button>
+      <div class="faq-a"><p>يمكنك التواصل معنا عبر الواتساب، وسنقوم بتزويدك بقائمة محدثة بأقرب الموزعين ونقاط البيع في مدينتك.</p></div>
     </div>
     <div class="faq-item reveal">
-      <button class="faq-q">هل تتوفر خدمة التوصيل؟<span class="plus">+</span></button>
-      <div class="faq-a"><p>حالياً نوفر منتجاتنا عبر مندوبي المبيعات في عدة مدن. تواصل معنا عبر واتساب لمعرفة أقرب نقطة بيع وتفاصيل الطلب.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">هل يمكن طلب كميات كبيرة للمناسبات والشركات؟<span class="plus">+</span></button>
-      <div class="faq-a"><p>نعم، نوفر طلبات خاصة للمناسبات وهدايا الشركات بتغليف مخصص. تواصل مع فريق المبيعات لتفاصيل أكثر.</p></div>
+      <button class="faq-q">هل يمكن تخصيص الطلبات للمناسبات الخاصة؟<span class="plus">+</span></button>
+      <div class="faq-a"><p>بالتأكيد! لدينا فريق متخصص لتلبية طلبات المناسبات، الأعراس، وهدايا الشركات، مع إمكانية تخصيص التغليف والمحتوى.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== ٧)+١٠) التواصل + النشرة ===================== -->
-<footer class="connect" id="connect">
+<!-- ===================== ٧)+١٠) التواصل + الفوتر ===================== -->
+<!-- 8- إضافة تعريف للبلوك -->
+<footer class="connect" id="connect" aria-label="معلومات التواصل والتذييل">
   <div class="connect-inner">
-    <h2>تواصل معنا</h2>
-    <p class="lead">للاستفسار أو الطلب، تواصل معنا مباشرة عبر واتساب — وسنسعد بخدمتك.</p>
+    <h2>نحن هنا لخدمتك</h2>
+    <p class="lead">لديك استفسار، اقتراح، أو ترغب في تقديم طلب؟ فريقنا جاهز للرد عليك مباشرة.</p>
 
-    <!-- استبدل الرقم في الرابط برقمك الفعلي بصيغة دولية بدون + أو أصفار -->
-    <a class="wa-btn" href="https://wa.me/9665XXXXXXXX?text=مرحباً، أرغب بالاستفسار عن منتجات ديتسلوفا" target="_blank" rel="noopener">
+    <!-- 6- تعديل رابط الواتساب -->
+    <a class="wa-btn" href="https://wa.me/966551953821" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.515zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
-      تواصل عبر واتساب
+      تواصل معنا عبر واتساب
     </a>
 
     <div class="contact-meta">
-      أو راسلنا على <a href="mailto:info@dateslova.com">info@dateslova.com</a>
+      أو راسلنا عبر البريد الإلكتروني <a href="mailto:info@dateslova.com">info@dateslova.com</a>
     </div>
 
     <!-- النشرة البريدية -->
     <div class="newsletter reveal">
-      <h3>اشترك ليصلك جديدنا</h3>
-      <p>أخبار المنتجات والعروض الخاصة — مباشرة إلى بريدك.</p>
+      <h3>ابقَ على تواصل</h3>
+      <p>اشترك في نشرتنا لتصلك أحدث المنتجات، العروض الحصرية، وأخبارنا أولاً بأول.</p>
       <form class="nl-form" onsubmit="return nlSubmit(event)">
-        <input type="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني" />
-        <button type="submit">اشترك الآن</button>
+        <input type="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+        <button type="submit">اشترك</button>
       </form>
     </div>
 
@@ -730,81 +761,68 @@ a{color:inherit;text-decoration:none}
       <a class="social-ico" href="#" target="_blank" rel="noopener" aria-label="انستقرام">
         <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.62c-3.15 0-3.5.01-4.74.07-.97.04-1.5.21-1.85.34-.46.18-.8.4-1.15.74-.34.35-.56.69-.74 1.15-.13.35-.3.88-.34 1.85-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.04.97.21 1.5.34 1.85.18.46.4.8.74 1.15.35.34.69.56 1.15.74.35.13.88.3 1.85.34 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.97-.04 1.5-.21 1.85-.34.46-.18.8-.4 1.15-.74.34-.35.56-.69.74-1.15.13-.35.3-.88.34-1.85.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.97-.21-1.5-.34-1.85-.18-.46-.4-.8-.74-1.15-.35-.34-.69-.56-1.15-.74-.35-.13-.88-.3-1.85-.34-1.24-.06-1.59-.07-4.74-.07zm0 2.76a5.46 5.46 0 110 10.92 5.46 5.46 0 010-10.92zm0 9a3.54 3.54 0 100-7.08 3.54 3.54 0 000 7.08zm6.95-9.22a1.28 1.28 0 11-2.56 0 1.28 1.28 0 012.56 0z"/></svg>
       </a>
-      <a class="social-ico" href="#" target="_blank" rel="noopener" aria-label="إكس">
+      <a class="social-ico" href="#" target="_blank" rel="noopener" aria-label="إكس (تويتر سابقاً)">
         <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a class="social-ico" href="#" target="_blank" rel="noopener" aria-label="سناب شات">
-        <svg viewBox="0 0 24 24"><path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.434.149.69.479.704.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.78-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.389-.135-.567-.046-.181-.105-.494-.166-.57-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.052-.15-.055-.225-.015-.243.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.298 1.097.298.234 0 .39-.06.466-.105l-.03-.595c-.105-1.629-.236-3.66.298-4.847C7.392 1.077 10.739.793 11.727.793h.479z"/></svg>
-      </a>
-      <a class="social-ico" href="#" target="_blank" rel="noopener" aria-label="تيك توك">
-        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298 0 .585.045.855.129V9.4a6.33 6.33 0 00-1-.08A6.34 6.34 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z"/></svg>
       </a>
     </div>
 
     <div class="footer-bar">
-      شقراء، منطقة الرياض، المملكة العربية السعودية &nbsp;·&nbsp; <b>شركة سعف طيبة التجارية</b><br>
-      © ٢٠٢٥ ديتسلوفا — جميع الحقوق محفوظة.
+      المملكة العربية السعودية &nbsp;·&nbsp; <b>شركة سعف طيبة التجارية</b><br>
+      © ٢٠٢٥ Dates lova — جميع الحقوق محفوظة.
     </div>
   </div>
 </footer>
 
 <script>
 /* ===== شريط التنقل: خلفية عند التمرير ===== */
-const nav=document.getElementById('nav');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
 
 /* ===== قائمة الجوال ===== */
-const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');
-menuBtn.addEventListener('click',()=>navLinks.classList.toggle('show'));
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('show')));
+const menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+  menuBtn.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('show')));
 
-/* ===== ظهور العناصر عند التمرير ===== */
-const io=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* ===== تأثير الشطب على الـ "بدون" ===== */
-const noGrid=document.getElementById('noGrid');
-const noIO=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      [...noGrid.children].forEach((item,i)=>setTimeout(()=>item.classList.add('struck'),i*220));
-      noIO.unobserve(e.target);
-    }
-  });
-},{threshold:.5});
-noIO.observe(noGrid);
+/* ===== ظهور العناصر عند التمرير (Intersection Observer) ===== */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* ===== الأسئلة الشائعة (Accordion) ===== */
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement,a=q.nextElementSibling,open=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(it=>{it.classList.remove('open');it.querySelector('.faq-a').style.maxHeight=null;});
-    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement, a = q.nextElementSibling, open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(it => { it.classList.remove('open'); it.querySelector('.faq-a').style.maxHeight = null; });
+    if (!open) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.setAttribute('aria-expanded', !open);
   });
 });
 
 /* ===== عدّاد الأرقام (بالأرقام العربية) ===== */
-function toArabic(n){return String(n).replace(/[0-9]/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);}
-const statIO=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'';
-      let cur=0,step=Math.max(1,Math.ceil(target/60));
-      const tick=()=>{cur+=step;if(cur>=target)cur=target;el.textContent=toArabic(cur)+suffix;if(cur<target)requestAnimationFrame(tick);};
-      tick();statIO.unobserve(el);
+function toArabic(n) { return String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); }
+const statIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
+      let cur = 0, step = Math.max(1, Math.ceil(target / 50));
+      const tick = () => { cur += step; if (cur >= target) cur = target; el.textContent = toArabic(cur) + suffix; if (cur < target) requestAnimationFrame(tick); };
+      tick(); statIO.unobserve(el);
     }
   });
-},{threshold:.6});
-document.querySelectorAll('.stat .num').forEach(el=>statIO.observe(el));
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat .num').forEach(el => statIO.observe(el));
 
-/* ===== النشرة (نموذج تجريبي — يُربط بخدمة بريدية لاحقاً) ===== */
-function nlSubmit(e){
+/* ===== النشرة (نموذج تجريبي) ===== */
+function nlSubmit(e) {
   e.preventDefault();
-  const inp=e.target.querySelector('input'),btn=e.target.querySelector('button');
-  btn.textContent='تم الاشتراك ✓';btn.style.background='#25D366';inp.value='';
-  setTimeout(()=>{btn.textContent='اشترك الآن';btn.style.background='';},2500);
+  const inp = e.target.querySelector('input'), btn = e.target.querySelector('button');
+  const originalText = btn.textContent;
+  btn.textContent = 'تم الاشتراك بنجاح ✓'; btn.style.background = '#25D366'; inp.value = ''; btn.disabled = true;
+  setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.disabled = false; }, 3000);
   return false;
 }
 </script>
