@@ -45,6 +45,35 @@ img { max-width: 100%; display: block; height: auto; }
 a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 /* =========================================================
+   نظام الصور المرقّمة — الرقم يظهر خلف الصورة ويختفي تلقائياً
+   عند وضع الصورة الحقيقية في مجلد image
+   ========================================================= */
+.img-slot {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg, rgba(200,150,79,.08) 0 14px, transparent 14px 28px),
+    linear-gradient(135deg, var(--gold-light), var(--brown-light));
+  overflow: hidden;
+}
+.img-slot img {
+  position: relative; z-index: 2;
+  width: 100%; height: 100%; display: block;
+}
+.img-slot .slot-badge {
+  position: absolute; z-index: 1; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: var(--white); text-align: center; padding: 14px; pointer-events: none;
+}
+.img-slot .slot-badge .n {
+  font-family: var(--font-head); font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1;
+  background: rgba(0,0,0,.35); border: 2px solid rgba(255,255,255,.6);
+  width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+}
+.img-slot .slot-badge .desc { font-size: .8rem; font-weight: 600; max-width: 90%; line-height: 1.5; opacity: .95; }
+
+/* =========================================================
    شريط التنقل (Navbar)
    ========================================================= */
 .nav {
@@ -60,14 +89,22 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 /* 1- تعديل الشعار: استخدام الصورة */
-.nav .logo img { height: 50px; width: auto; /* تعديل حجم الشعار */ }
+.nav .logo img { height: 56px; width: auto; /* تعديل حجم الشعار */ }
+/* خلفية بيضاء خلف الشعار قبل التمرير ليظهر فوق الواجهة الداكنة */
+.nav .logo {
+  background: rgba(255,255,255,.92); padding: 6px 12px; border-radius: 14px;
+  display: inline-flex; transition: all .4s var(--ease);
+}
+.nav.scrolled .logo { background: transparent; padding: 0; }
 /* 9- عبارة ديتسلوفا بالانجليزي فقط (تم استبدالها بالشعار الصوري) */
 
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a {
-  font-size: 0.95rem; color: var(--dark-text); font-weight: 500; position: relative;
+  font-size: 0.95rem; color: var(--white); font-weight: 500; position: relative;
 }
+.nav.scrolled .nav-links a { color: var(--dark-text); }
 .nav-links a:hover { color: var(--gold); }
+.nav.scrolled .nav-links a:hover { color: var(--gold); }
 .nav-links a::after {
   content: ""; position: absolute; bottom: -6px; right: 0; width: 0; height: 2px;
   background: var(--gold); transition: width 0.3s var(--ease);
@@ -76,13 +113,13 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .nav .nav-cta {
   background: var(--gold); color: var(--white);
   padding: 10px 24px; border-radius: 40px; font-weight: 600; font-size: 0.92rem;
-  transition: all 0.3s var(--ease);
 }
 .nav .nav-cta:hover { transform: translateY(-2px); background: var(--gold-light); box-shadow: 0 8px 20px rgba(200, 150, 79, 0.3); }
 .menu-btn {
   display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 6px;
 }
-.menu-btn span { width: 26px; height: 2px; background: var(--dark-text); transition: 0.3s; }
+.menu-btn span { width: 26px; height: 2px; background: var(--white); transition: 0.3s; }
+.nav.scrolled .menu-btn span { background: var(--dark-text); }
 
 /* =========================================================
    ١) الواجهة الرئيسية HERO
@@ -95,7 +132,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 /* 4- صورة افتراضية للواجهة الرئيسية */
 .hero-bg {
   position: absolute; inset: 0; z-index: 1;
-  background-image: url('image_0.png'); /* صورة لوح الشوكولاتة */
+  background-image: url('image/1.jpg'); /* صورة الواجهة رقم ١ */
   background-size: cover; background-position: center;
 }
 .hero-bg::after {
@@ -103,6 +140,13 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   /* تدرج لوني لجعل النص مقروءاً */
   background: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
 }
+/* شارة رقم الواجهة الرئيسية — تظهر في الزاوية وتختفي عند وضع صورة حقيقية */
+.hero-num {
+  position: absolute; z-index: 3; bottom: 24px; left: 24px;
+  background: rgba(0,0,0,.5); border: 2px solid rgba(255,255,255,.6); border-radius: 14px;
+  padding: 10px 16px; color: var(--white); font-size: .82rem; font-weight: 600; line-height: 1.6;
+}
+.hero-num b { font-family: var(--font-head); font-size: 1.3rem; display: block; }
 .hero-inner {
   position: relative; z-index: 5;
   max-width: var(--maxw); margin: 0 auto; width: 100%;
@@ -228,8 +272,9 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 /* 4- صورة افتراضية لقصة البراند */
 .story-img {
   border-radius: 30px; overflow: hidden; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 4 / 5;
 }
-.story-img img { width: 100%; height: auto; display: block; transition: transform 0.5s var(--ease); }
+.story-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 .story-img:hover img { transform: scale(1.03); }
 
 /* =========================================================
@@ -248,7 +293,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .prod-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(200, 150, 79, 0.15); }
 /* 4- صور افتراضية للمنتجات */
 .prod-img { position: relative; padding-top: 100%; overflow: hidden; background: var(--cream); }
-.prod-img img {
+.prod-img.img-slot img {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover; transition: transform 0.6s var(--ease);
 }
@@ -290,8 +335,10 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   padding-top: 50px; border-top: 1px solid rgba(200, 150, 79, 0.1);
 }
 /* 4- صور افتراضية للشهادات */
-.cert-img { height: 80px; width: auto; opacity: 0.7; transition: opacity 0.3s; filter: grayscale(1); }
-.cert-img:hover { opacity: 1; filter: grayscale(0); }
+.cert-img { height: 80px; width: 120px; border-radius: 10px; opacity: 0.85; transition: opacity 0.3s; }
+.cert-img:hover { opacity: 1; }
+.cert-img img { filter: grayscale(1); transition: filter .3s; }
+.cert-img:hover img { filter: grayscale(0); }
 
 /* =========================================================
    ٦) شهادات الثقة
@@ -308,8 +355,10 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .logos-row .mini-head { font-size: 1rem; color: var(--brown-light); letter-spacing: 1.5px; margin-bottom: 30px; font-weight: 600; }
 .logos { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center; }
 /* 4- صور افتراضية لشعارات العملاء */
-.client-logo { height: 60px; width: auto; opacity: 0.5; transition: all 0.3s; filter: grayscale(1); }
-.client-logo:hover { opacity: 1; filter: grayscale(0); transform: translateY(-3px); }
+.client-logo { height: 70px; width: 140px; border-radius: 8px; opacity: 0.85; transition: all 0.3s; }
+.client-logo:hover { opacity: 1; transform: translateY(-3px); }
+.client-logo img { filter: grayscale(1); transition: filter .3s; }
+.client-logo:hover img { filter: grayscale(0); }
 
 .quotes {
   max-width: 900px; margin: 0 auto;
@@ -344,8 +393,8 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 }
 .b2b-text li::before { content: "✓"; color: var(--gold); font-weight: bold; font-size: 1.2rem; }
 /* 4- صورة افتراضية لطلبات الشركات */
-.b2b-img { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); }
-.b2b-img img { width: 100%; height: auto; display: block; }
+.b2b-img { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); aspect-ratio: 4 / 3; }
+.b2b-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* =========================================================
    ٨) الأسئلة الشائعة FAQ
@@ -453,7 +502,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 @media (max-width: 768px) {
   .nav { padding: 15px 20px; }
   /* 1- تعديل الشعار للجوال */
-  .nav .logo img { height: 40px; }
+  .nav .logo img { height: 42px; }
   .nav-links {
     position: fixed; top: 0; right: 0; bottom: 0; width: 80%; max-width: 320px;
     background: var(--white); flex-direction: column; justify-content: center;
@@ -463,7 +512,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   .nav-links.show { transform: translateX(0); }
   .nav-links a { font-size: 1.2rem; color: var(--dark-text); }
   .menu-btn { display: flex; z-index: 101; }
-  .menu-btn span { background: var(--dark-text); }
+  .menu-btn span { background: var(--white); }
   .nav.scrolled .menu-btn span { background: var(--dark-text); }
   .nav .nav-cta { display: none; }
 
@@ -485,9 +534,9 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 <!-- ===================== شريط التنقل ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
 <nav class="nav" id="nav" aria-label="شريط التنقل الرئيسي">
-  <!-- 1- تعديل الشعار: استخدام الصورة -->
+  <!-- 1- تعديل الشعار: استخدام الصورة المرفقة (ضعها باسم logo في مجلد image) -->
   <a href="#" class="logo">
-    <img src="image_3.png" alt="Dates lova - شعار">
+    <img src="image/logo.png" alt="Dates lova - شعار">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="#value">المميزات</a>
@@ -504,8 +553,10 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 <!-- ===================== ١) الواجهة الرئيسية HERO ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصورة رقم ١: خلفية الواجهة الرئيسية → image/1.jpg -->
 <header class="hero" aria-label="الواجهة الرئيسية">
   <div class="hero-bg"></div>
+  <div class="hero-num"><b>١</b>صورة الواجهة الرئيسية<br>image/1.jpg</div>
   <div class="hero-inner">
     <div class="eyebrow reveal">شوكولاتة فاخرة من قلب نجد</div>
     <!-- 10- تعديل الوصف -->
@@ -564,6 +615,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 <!-- ===================== ٣) قصة البراند ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصورة رقم ٢: قصة البراند → image/2.jpg -->
 <section class="story" id="story" aria-label="قصة علامتنا التجارية">
   <div class="story-inner">
     <div class="story-text reveal">
@@ -573,15 +625,17 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
       <p>بدأت فكرتنا من شغف بسيط: الجمع بين فخامة الشوكولاتة العالمية وحلاوة التمر الطبيعية من أرضنا. من قلب نجد، انطلقنا لنقدم منتجاً يوازن بين المذاق الرفيع والمكونات الصحية.</p>
       <p>نؤمن أن الاستمتاع بالشوكولاتة لا يجب أن يكون مصحوباً بالذنب. لذلك، ننتقي تمورنا بعناية فائقة ونمزجها مع أجود أنواع الكاكاو، لنقدم لك تجربة غنية، طبيعية، وخالية من السكر المضاف.</p>
     </div>
-    <div class="story-img reveal">
+    <div class="story-img img-slot reveal">
       <!-- 4- صورة افتراضية لقصة البراند -->
-      <img src="image_1.png" alt="شيف يقوم بتحضير شوكولاتة التمر يدوياً">
+      <img src="image/2.jpg" alt="شيف يقوم بتحضير شوكولاتة التمر يدوياً" onerror="this.style.opacity=0">
+      <span class="slot-badge"><span class="n">٢</span><span class="desc">صورة قصة البراند<br>image/2.jpg</span></span>
     </div>
   </div>
 </section>
 
 <!-- ===================== ٤) معرض المنتجات ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصور ٣ إلى ٦: المنتجات → image/3.jpg ... image/6.jpg -->
 <section class="products" id="products" aria-label="معرض منتجاتنا">
   <div class="section-head reveal">
     <span class="eyebrow">تشكيلتنا المختارة</span>
@@ -592,19 +646,19 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   <div class="prod-grid">
     <!-- 4- صور منتجات افتراضية -->
     <div class="prod-card reveal">
-      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+1" alt="منتج شوكولاتة 1"></div>
+      <div class="prod-img img-slot"><img src="image/3.jpg" alt="منتج شوكولاتة 1" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٣</span><span class="desc">صورة المنتج ١<br>image/3.jpg</span></span></div>
       <div class="prod-body"><h3>بار الشوكولاتة الداكنة</h3><p>شوكولاتة غنية بنسبة 70% كاكاو مع قطع تمر الخلاص.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+2" alt="منتج شوكولاتة 2"></div>
+      <div class="prod-img img-slot"><img src="image/4.jpg" alt="منتج شوكولاتة 2" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٤</span><span class="desc">صورة المنتج ٢<br>image/4.jpg</span></span></div>
       <div class="prod-body"><h3>تمر مغطى بالشوكولاتة</h3><p>تمرات سكري فاخرة محشوة باللوز ومغطاة بطبقة غنية.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+3" alt="منتج شوكولاتة 3"></div>
+      <div class="prod-img img-slot"><img src="image/5.jpg" alt="منتج شوكولاتة 3" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٥</span><span class="desc">صورة المنتج ٣<br>image/5.jpg</span></span></div>
       <div class="prod-body"><h3>مكعبات الطاقة</h3><p>مزيج صحي من التمر، المكسرات، والكاكاو بدون إضافات.</p></div>
     </div>
     <div class="prod-card reveal">
-      <div class="prod-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Product+4" alt="منتج شوكولاتة 4"></div>
+      <div class="prod-img img-slot"><img src="image/6.jpg" alt="منتج شوكولاتة 4" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٦</span><span class="desc">صورة المنتج ٤<br>image/6.jpg</span></span></div>
       <div class="prod-body"><h3>علبة الإهداء الفاخرة</h3><p>تشكيلة مختارة من أفضل منتجاتنا في عبوة أنيقة.</p></div>
     </div>
   </div>
@@ -614,6 +668,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 <!-- ===================== ٥) الجودة والتصنيع ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصور ٧ إلى ١١: المصنع → image/7.jpg ... image/11.jpg | الصور ١٢ إلى ١٤: الشهادات -->
 <section class="quality" id="quality" aria-label="معايير الجودة والتصنيع">
   <div class="section-head reveal">
     <span class="eyebrow">صنعت بإتقان</span>
@@ -622,11 +677,11 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   </div>
   <!-- 4- صور مصنع افتراضية -->
   <div class="q-gallery reveal">
-    <div class="q-img wide"><img src="https://placehold.co/800x400/E0B878/FFFFFF?text=Factory+Process" alt="عملية التصنيع"></div>
-    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Raw+Ingredients" alt="المكونات الخام"></div>
-    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Quality+Check" alt="فحص الجودة"></div>
-    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Packaging" alt="التغليف"></div>
-    <div class="q-img"><img src="https://placehold.co/400x400/E0B878/FFFFFF?text=Final+Product" alt="المنتج النهائي"></div>
+    <div class="q-img wide img-slot"><img src="image/7.jpg" alt="عملية التصنيع" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٧</span><span class="desc">صورة المصنع<br>image/7.jpg</span></span></div>
+    <div class="q-img img-slot"><img src="image/8.jpg" alt="المكونات الخام" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٨</span><span class="desc">المكونات الخام<br>image/8.jpg</span></span></div>
+    <div class="q-img img-slot"><img src="image/9.jpg" alt="فحص الجودة" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">٩</span><span class="desc">فحص الجودة<br>image/9.jpg</span></span></div>
+    <div class="q-img img-slot"><img src="image/10.jpg" alt="التغليف" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">١٠</span><span class="desc">التغليف<br>image/10.jpg</span></span></div>
+    <div class="q-img img-slot"><img src="image/11.jpg" alt="المنتج النهائي" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">١١</span><span class="desc">المنتج النهائي<br>image/11.jpg</span></span></div>
   </div>
   <div class="q-points">
     <div class="q-point reveal"><div class="ico">🌍</div><h3>مكونات مختارة</h3><p>نستورد أجود أنواع الكاكاو ونختار أفضل التمور المحلية.</p></div>
@@ -635,14 +690,15 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
   </div>
   <!-- 4- صور شهادات افتراضية -->
   <div class="q-certs reveal">
-    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=SFDA" alt="شعار هيئة الغذاء والدواء" class="cert-img">
-    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=ISO+22000" alt="شهادة الآيزو" class="cert-img">
-    <img src="https://placehold.co/120x80/E0B878/FFFFFF?text=Halal" alt="شهادة حلال" class="cert-img">
+    <span class="cert-img img-slot"><img src="image/12.jpg" alt="شعار هيئة الغذاء والدواء" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٢</span></span></span>
+    <span class="cert-img img-slot"><img src="image/13.jpg" alt="شهادة الآيزو" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٣</span></span></span>
+    <span class="cert-img img-slot"><img src="image/14.jpg" alt="شهادة حلال" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٤</span></span></span>
   </div>
 </section>
 
 <!-- ===================== ٦) شهادات الثقة ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصور ١٥ إلى ١٨: شعارات العملاء → image/15.jpg ... image/18.jpg -->
 <section class="trust" id="trust" aria-label="آراء العملاء والشركاء">
   <div class="section-head reveal">
     <span class="eyebrow">شركاء النجاح</span>
@@ -658,10 +714,10 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
     <div class="mini-head">نفخر بخدمة نخبة من الشركات والجهات</div>
     <!-- 4- صور شعارات عملاء افتراضية -->
     <div class="logos">
-      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+1" alt="شعار عميل 1" class="client-logo">
-      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+2" alt="شعار عميل 2" class="client-logo">
-      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+3" alt="شعار عميل 3" class="client-logo">
-      <img src="https://placehold.co/140x70/E0B878/FFFFFF?text=Client+Logo+4" alt="شعار عميل 4" class="client-logo">
+      <span class="client-logo img-slot"><img src="image/15.jpg" alt="شعار عميل 1" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٥</span></span></span>
+      <span class="client-logo img-slot"><img src="image/16.jpg" alt="شعار عميل 2" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٦</span></span></span>
+      <span class="client-logo img-slot"><img src="image/17.jpg" alt="شعار عميل 3" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٧</span></span></span>
+      <span class="client-logo img-slot"><img src="image/18.jpg" alt="شعار عميل 4" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٨</span></span></span>
     </div>
   </div>
   <div class="quotes">
@@ -681,6 +737,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
 <!-- ===================== ٩) طلبات الشركات B2B ===================== -->
 <!-- 8- إضافة تعريف للبلوك -->
+<!-- الصورة رقم ١٩: طلبات الشركات → image/19.jpg -->
 <section class="b2b" id="b2b" aria-label="خدمات قطاع الأعمال">
   <div class="b2b-inner reveal">
     <div class="b2b-text">
@@ -694,9 +751,10 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
       <!-- 6- تعديل رابط الواتساب -->
       <a href="https://wa.me/966551953821" class="btn btn-primary" target="_blank">تواصل مع فريق المبيعات</a>
     </div>
-    <div class="b2b-img">
+    <div class="b2b-img img-slot">
       <!-- 4- صورة افتراضية لطلبات الشركات -->
-      <img src="image_2.png" alt="علبة هدايا فاخرة للشركات في غرفة اجتماعات">
+      <img src="image/19.jpg" alt="علبة هدايا فاخرة للشركات في غرفة اجتماعات" onerror="this.style.opacity=0">
+      <span class="slot-badge"><span class="n">١٩</span><span class="desc">صورة طلبات الشركات<br>image/19.jpg</span></span>
     </div>
   </div>
 </section>
@@ -785,6 +843,13 @@ menuBtn.addEventListener('click', () => {
   menuBtn.setAttribute('aria-expanded', navLinks.classList.contains('show'));
 });
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('show')));
+
+/* ===== إخفاء شارة رقم الواجهة الرئيسية عند توفر صورة الخلفية ===== */
+(function () {
+  const probe = new Image();
+  probe.onload = () => { const n = document.querySelector('.hero-num'); if (n) n.style.display = 'none'; };
+  probe.src = 'image/1.jpg';
+})();
 
 /* ===== ظهور العناصر عند التمرير (Intersection Observer) ===== */
 const io = new IntersectionObserver((entries) => {
