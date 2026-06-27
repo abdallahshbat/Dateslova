@@ -448,10 +448,22 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .social-ico svg { width: 22px; height: 22px; fill: currentColor; }
 .footer-bar {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 30px 0; text-align: center;
+  padding: 36px 0 30px; text-align: center;
   color: rgba(255, 255, 255, 0.6); font-size: 0.95rem;
 }
 .footer-bar b { color: var(--gold); font-weight: 600; }
+.footer-loc { color: rgba(255, 255, 255, 0.75); font-size: 1rem; }
+.footer-loc b { color: var(--gold); display: block; margin-top: 6px; font-size: 1.15rem; font-weight: 700; }
+.footer-legal {
+  margin-top: 18px;
+  font-size: 1rem; color: rgba(255, 255, 255, 0.75);
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+}
+.footer-copy {
+  margin-top: 22px; padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.55);
+}
 
 /* =========================================================
    تأثيرات الظهور
@@ -596,6 +608,9 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
 
   .hero-ctas { flex-direction: column; gap: 12px; }
   .btn { justify-content: center; width: 100%; }
+
+  .footer-legal { font-size: 0.88rem; gap: 5px; }
+  .footer-loc { font-size: 0.88rem; }
 }
 </style>
 </head>
@@ -656,19 +671,19 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
     <div class="no-grid">
       <div class="no-item">
         <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
-        <span class="no-word">سكر مصنّع</span><span class="no-label">نستخدم تمر طبيعي فقط</span>
+        <span class="no-word">سكر مصنّع</span>
       </div>
       <div class="no-item">
         <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
-        <span class="no-word">زيوت مهدرجة</span><span class="no-label">مكونات نقية وصحية</span>
+        <span class="no-word">زيوت مهدرجة</span>
       </div>
       <div class="no-item">
         <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
-        <span class="no-word">مواد حافظة</span><span class="no-label">نضمن لك الطزاجة</span>
+        <span class="no-word">مواد حافظة</span>
       </div>
       <div class="no-item">
         <div class="no-icon-wrapper"><span class="no-icon">✕</span></div>
-        <span class="no-word">نكهات صناعية</span><span class="no-label">نكهة أصيلة وغنية</span>
+        <span class="no-word">نكهات صناعية</span>
       </div>
     </div>
   </div>
@@ -681,7 +696,7 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
     <div class="feat-card reveal"><div class="feat-ico">🌴</div><h3>محلّاة بالتمر</h3><p>نستبدل السكر المصنّع بحلاوة التمر الطبيعية — طعم فاخر وقيمة غذائية عالية.</p></div>
     <!-- 10- تعديل الوصف -->
     <div class="feat-card reveal"><div class="feat-ico">🍫</div><h3>شوكولاتة فاخرة</h3><p>مصنوعة من أجود أنواع حبوب الكاكاو — لتقديم تجربة تذوق استثنائية.</p></div>
-    <div class="feat-card reveal"><div class="feat-ico">🌿</div><h3>مكونات نظيفة</h3><p>خالية تماماً من أي إضافات غير مرغوبة، لنقدم لك منتجاً تثق به.</p></div>
+    <div class="feat-card reveal"><div class="feat-ico">🌿</div><h3>مكونات طبيعية</h3><p>خالية تماماً من أي إضافات غير طبيعية، لنقدم لك منتجاً تثق به.</p></div>
     <div class="feat-card reveal"><div class="feat-ico">🎁</div><h3>هدية راقية</h3><p>تغليف أنيق ومميز يناسب الإهداء في كافة المناسبات الخاصة والرسمية.</p></div>
   </div>
 </section>
@@ -757,56 +772,12 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
     <div class="q-img img-slot"><img src="image/10.jpg" alt="التغليف" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">١٠</span><span class="desc">التغليف<br>image/10.jpg</span></span></div>
     <div class="q-img img-slot"><img src="image/11.jpg" alt="المنتج النهائي" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n">١١</span><span class="desc">المنتج النهائي<br>image/11.jpg</span></span></div>
   </div>
-  <div class="q-points">
-    <div class="q-point reveal"><div class="ico">🌍</div><h3>مكونات مختارة</h3><p>نستورد أجود أنواع الكاكاو ونختار أفضل التمور المحلية.</p></div>
-    <div class="q-point reveal"><div class="ico">🏭</div><h3>إنتاج محلي</h3><p>نصنع منتجاتنا في مصنعنا المجهز بأحدث التقنيات وبأيدي خبراء.</p></div>
-    <div class="q-point reveal"><div class="ico">✅</div><h3>جودة معتمدة</h3><p>نلتزم بأعلى معايير سلامة الغذاء ونحمل التراخيص اللازمة.</p></div>
-  </div>
-  <!-- 4- صور شهادات افتراضية -->
+  <!-- 4- صور افتراضية للشهادات -->
   <div class="q-certs reveal">
     <span class="cert-img img-slot"><img src="image/12.jpg" alt="شعار هيئة الغذاء والدواء" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٢</span></span></span>
     <span class="cert-img img-slot"><img src="image/13.jpg" alt="شهادة الآيزو" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٣</span></span></span>
     <span class="cert-img img-slot"><img src="image/14.jpg" alt="شهادة حلال" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٤</span></span></span>
   </div>
-</section>
-
-<!-- ===================== ٦) شهادات الثقة ===================== -->
-<!-- 8- إضافة تعريف للبلوك -->
-<!-- الصور ١٥ إلى ١٨: شعارات العملاء → image/15.jpg ... image/18.jpg -->
-<section class="trust" id="trust" aria-label="آراء العملاء والشركاء">
-  <div class="section-head reveal">
-    <span class="eyebrow">شركاء النجاح</span>
-    <h2>ثقتكم بنا هي فخرنا</h2>
-  </div>
-  <div class="stats">
-    <div class="stat reveal"><div class="stat-ico">🏪</div><div class="num" data-count="25">0</div><div class="lbl">نقطة بيع معتمدة</div></div>
-    <div class="stat reveal"><div class="stat-ico">🏙️</div><div class="num" data-count="8">0</div><div class="lbl">مدن نغطيها</div></div>
-    <div class="stat reveal"><div class="stat-ico">👥</div><div class="num" data-count="5000" data-suffix="+">0</div><div class="lbl">عميل سعيد</div></div>
-    <div class="stat reveal"><div class="stat-ico">🍫</div><div class="num" data-count="35" data-suffix="+">0</div><div class="lbl">منتج متنوع</div></div>
-  </div>
-  <div class="logos-row reveal">
-    <div class="mini-head">نفخر بخدمة نخبة من الشركات والجهات</div>
-    <!-- 4- صور شعارات عملاء افتراضية -->
-    <div class="logos">
-      <span class="client-logo img-slot"><img src="image/15.jpg" alt="شعار عميل 1" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٥</span></span></span>
-      <span class="client-logo img-slot"><img src="image/16.jpg" alt="شعار عميل 2" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٦</span></span></span>
-      <span class="client-logo img-slot"><img src="image/17.jpg" alt="شعار عميل 3" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٧</span></span></span>
-      <span class="client-logo img-slot"><img src="image/18.jpg" alt="شعار عميل 4" onerror="this.style.opacity=0"><span class="slot-badge"><span class="n" style="width:40px;height:40px;font-size:1.1rem;margin-bottom:0">١٨</span></span></span>
-    </div>
-  </div>
-  <div class="quotes" id="quotesTrack">
-    <div class="quote-card reveal">
-      <div class="mark">”</div>
-      <p>تجربة استثنائية! الطعم المتوازن بين الشوكولاتة والتمر شيء لا يُقاوم. التغليف راقي جداً ومناسب للهدايا.</p>
-      <div class="who">أحمد العتيبي<span>الرياض</span></div>
-    </div>
-    <div class="quote-card reveal">
-      <div class="mark">”</div>
-      <p>أخيراً وجدت بديلاً صحياً ولذيذ للشوكولاتة التقليدية. أطفالي أحبوها جداً وأنا مطمئنة لمكوناتها الطبيعية.</p>
-      <div class="who">سارة محمد<span>جدة</span></div>
-    </div>
-  </div>
-  <div class="carousel-dots" id="quoteDots" aria-hidden="true"></div>
 </section>
 
 <!-- ===================== ٩) طلبات الشركات B2B ===================== -->
@@ -895,8 +866,13 @@ a { color: inherit; text-decoration: none; transition: color 0.3s; }
     </div>
 
     <div class="footer-bar">
-      المملكة العربية السعودية &nbsp;·&nbsp; <b>شركة سعف طيبة التجارية</b><br>
-      © ٢٠٢٥ Dates lova — جميع الحقوق محفوظة.
+      <div class="footer-loc">المملكة العربية السعودية - شقرا المدينة الصناعية مدن &nbsp;·&nbsp; <b>مصنع شركة سعف طيبة التجارية</b></div>
+      <div class="footer-legal">
+        <span>رقم السجل التجاري 123456789</span>
+        <span>الرقم الضريبي 123456789</span>
+        <span>رقم الترخيص الصناعي 123456789</span>
+      </div>
+      <div class="footer-copy">© 2026 Dates lova — جميع الحقوق محفوظة.</div>
     </div>
   </div>
 </footer>
@@ -937,25 +913,7 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
 
-/* ===== عدّاد الأرقام (بالأرقام الإنجليزية) + نبضة بعد انتهاء العدّ ===== */
-const statIO = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
-      let cur = 0, step = Math.max(1, Math.ceil(target / 50));
-      const tick = () => {
-        cur += step; if (cur >= target) cur = target;
-        el.textContent = cur + suffix;
-        if (cur < target) requestAnimationFrame(tick);
-        else el.classList.add('done');
-      };
-      tick(); statIO.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.stat .num').forEach(el => statIO.observe(el));
-
-/* ===== كاروسيل الجوال (المنتجات + آراء العملاء) ===== */
+/* ===== كاروسيل الجوال (المنتجات) ===== */
 function setupCarousel(trackId, dotsId) {
   const track = document.getElementById(trackId), dots = document.getElementById(dotsId);
   if (!track || !dots) return;
@@ -983,7 +941,6 @@ function setupCarousel(trackId, dotsId) {
 }
 if (window.matchMedia('(max-width: 768px)').matches) {
   setupCarousel('prodTrack', 'prodDots');
-  setupCarousel('quotesTrack', 'quoteDots');
 }
 </script>
 </body>
